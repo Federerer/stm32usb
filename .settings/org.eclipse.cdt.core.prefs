@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.cross.lib.debug.494948809.1722662489/PATH/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.cross.lib.debug.494948809.1722662489/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.cross.lib.debug.494948809.1722662489/PATH/value=C\:\\6-2017-q2-update\\bin;C\:\\msys\\bin;C\:\\openocd-0.9.0-rc1
+environment/project/cdt.managedbuild.config.gnu.cross.lib.debug.494948809.1722662489/append=true
+environment/project/cdt.managedbuild.config.gnu.cross.lib.debug.494948809.1722662489/appendContributed=true

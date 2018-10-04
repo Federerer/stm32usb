@@ -1,0 +1,2949 @@
+In archive libUSBDevice.a:
+
+Endpoint.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <_ZN6USBLib8EndpointC1Eh>:
+		reinterpret_cast<void*>(USB_PMAADDR)) EndpointBufferDescription[8];
+
+const Endpoint endpoints[] =
+{ 0, 1, 2, 3, 4, 5, 6, 7 };
+
+Endpoint::Endpoint(uint8_t number) :
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	000a      	movs	r2, r1
+   a:	1cfb      	adds	r3, r7, #3
+   c:	701a      	strb	r2, [r3, #0]
+		_number
+		{ number }
+   e:	4a06      	ldr	r2, [pc, #24]	; (28 <_ZN6USBLib8EndpointC1Eh+0x28>)
+  10:	687b      	ldr	r3, [r7, #4]
+  12:	601a      	str	r2, [r3, #0]
+  14:	687b      	ldr	r3, [r7, #4]
+  16:	1cfa      	adds	r2, r7, #3
+  18:	7812      	ldrb	r2, [r2, #0]
+  1a:	711a      	strb	r2, [r3, #4]
+{
+
+}
+  1c:	687b      	ldr	r3, [r7, #4]
+  1e:	0018      	movs	r0, r3
+  20:	46bd      	mov	sp, r7
+  22:	b002      	add	sp, #8
+  24:	bd80      	pop	{r7, pc}
+  26:	46c0      	nop			; (mov r8, r8)
+  28:	00000008 	.word	0x00000008
+
+0000002c <_ZN6USBLib8Endpoint16handleInTransferEv>:
+
+void Endpoint::handleInTransfer()
+{
+  2c:	b580      	push	{r7, lr}
+  2e:	b082      	sub	sp, #8
+  30:	af00      	add	r7, sp, #0
+  32:	6078      	str	r0, [r7, #4]
+}
+  34:	46c0      	nop			; (mov r8, r8)
+  36:	46bd      	mov	sp, r7
+  38:	b002      	add	sp, #8
+  3a:	bd80      	pop	{r7, pc}
+
+0000003c <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt>:
+
+void Endpoint::openForTx(EndpointType type, uint16_t maxPacketSize) const
+{
+  3c:	b580      	push	{r7, lr}
+  3e:	b084      	sub	sp, #16
+  40:	af00      	add	r7, sp, #0
+  42:	6078      	str	r0, [r7, #4]
+  44:	0008      	movs	r0, r1
+  46:	0011      	movs	r1, r2
+  48:	1cbb      	adds	r3, r7, #2
+  4a:	1c02      	adds	r2, r0, #0
+  4c:	801a      	strh	r2, [r3, #0]
+  4e:	003b      	movs	r3, r7
+  50:	1c0a      	adds	r2, r1, #0
+  52:	801a      	strh	r2, [r3, #0]
+	auto reg = reinterpret_cast<uint16_t*>(USB + 4 * _number);
+  54:	687b      	ldr	r3, [r7, #4]
+  56:	791b      	ldrb	r3, [r3, #4]
+  58:	001a      	movs	r2, r3
+  5a:	23b8      	movs	r3, #184	; 0xb8
+  5c:	005b      	lsls	r3, r3, #1
+  5e:	4353      	muls	r3, r2
+  60:	4a22      	ldr	r2, [pc, #136]	; (ec <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt+0xb0>)
+  62:	4694      	mov	ip, r2
+  64:	4463      	add	r3, ip
+  66:	60fb      	str	r3, [r7, #12]
+
+	// set up the endpoint type and address
+
+	*reg = (*reg & USB_EP_T_MASK) | static_cast<uint16_t>(type);
+  68:	68fb      	ldr	r3, [r7, #12]
+  6a:	881b      	ldrh	r3, [r3, #0]
+  6c:	b21b      	sxth	r3, r3
+  6e:	4a20      	ldr	r2, [pc, #128]	; (f0 <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt+0xb4>)
+  70:	4013      	ands	r3, r2
+  72:	b21a      	sxth	r2, r3
+  74:	1cbb      	adds	r3, r7, #2
+  76:	2100      	movs	r1, #0
+  78:	5e5b      	ldrsh	r3, [r3, r1]
+  7a:	4313      	orrs	r3, r2
+  7c:	b21b      	sxth	r3, r3
+  7e:	b29a      	uxth	r2, r3
+  80:	68fb      	ldr	r3, [r7, #12]
+  82:	801a      	strh	r2, [r3, #0]
+	*reg = (*reg & USB_EPREG_MASK) | _number | USB_EP_CTR_TX;
+  84:	68fb      	ldr	r3, [r7, #12]
+  86:	881b      	ldrh	r3, [r3, #0]
+  88:	b21b      	sxth	r3, r3
+  8a:	4a1a      	ldr	r2, [pc, #104]	; (f4 <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt+0xb8>)
+  8c:	4013      	ands	r3, r2
+  8e:	b21a      	sxth	r2, r3
+  90:	687b      	ldr	r3, [r7, #4]
+  92:	791b      	ldrb	r3, [r3, #4]
+  94:	b21b      	sxth	r3, r3
+  96:	4313      	orrs	r3, r2
+  98:	b21b      	sxth	r3, r3
+  9a:	2280      	movs	r2, #128	; 0x80
+  9c:	4313      	orrs	r3, r2
+  9e:	b21b      	sxth	r3, r3
+  a0:	b29a      	uxth	r2, r3
+  a2:	68fb      	ldr	r3, [r7, #12]
+  a4:	801a      	strh	r2, [r3, #0]
+
+	// set up the TX address in the BTABLE
+
+	endpointBufferDescriptionTable[_number].tx.addr = 0x58;
+  a6:	4b14      	ldr	r3, [pc, #80]	; (f8 <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt+0xbc>)
+  a8:	681a      	ldr	r2, [r3, #0]
+  aa:	687b      	ldr	r3, [r7, #4]
+  ac:	791b      	ldrb	r3, [r3, #4]
+  ae:	00db      	lsls	r3, r3, #3
+  b0:	18d3      	adds	r3, r2, r3
+  b2:	2258      	movs	r2, #88	; 0x58
+  b4:	801a      	strh	r2, [r3, #0]
+
+	// if DTOG_TX is 1 then we need to write 1 to toggle it to zero
+
+	if ((*reg & USB_EP_DTOG_TX) != 0)
+  b6:	68fb      	ldr	r3, [r7, #12]
+  b8:	881b      	ldrh	r3, [r3, #0]
+  ba:	001a      	movs	r2, r3
+  bc:	2340      	movs	r3, #64	; 0x40
+  be:	4013      	ands	r3, r2
+  c0:	d00b      	beq.n	da <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt+0x9e>
+		*reg = (*reg & USB_EPREG_MASK) | USB_EP_CTR_TX | USB_EP_DTOG_TX;
+  c2:	68fb      	ldr	r3, [r7, #12]
+  c4:	881b      	ldrh	r3, [r3, #0]
+  c6:	b21b      	sxth	r3, r3
+  c8:	4a0c      	ldr	r2, [pc, #48]	; (fc <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt+0xc0>)
+  ca:	4013      	ands	r3, r2
+  cc:	b21b      	sxth	r3, r3
+  ce:	22c0      	movs	r2, #192	; 0xc0
+  d0:	4313      	orrs	r3, r2
+  d2:	b21b      	sxth	r3, r3
+  d4:	b29a      	uxth	r2, r3
+  d6:	68fb      	ldr	r3, [r7, #12]
+  d8:	801a      	strh	r2, [r3, #0]
+
+	// NAK the TX endpoint (nothing to go yet)
+
+	setTxStatus(EndpointStatus::Naked);
+  da:	687b      	ldr	r3, [r7, #4]
+  dc:	2102      	movs	r1, #2
+  de:	0018      	movs	r0, r3
+  e0:	f7ff fffe 	bl	1ec <_ZNK6USBLib8Endpoint11setTxStatusENS_14EndpointStatusE>
+}
+  e4:	46c0      	nop			; (mov r8, r8)
+  e6:	46bd      	mov	sp, r7
+  e8:	b004      	add	sp, #16
+  ea:	bd80      	pop	{r7, pc}
+  ec:	40005c00 	.word	0x40005c00
+  f0:	ffff898f 	.word	0xffff898f
+  f4:	ffff8f8f 	.word	0xffff8f8f
+  f8:	00000000 	.word	0x00000000
+  fc:	ffff8f0f 	.word	0xffff8f0f
+
+00000100 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt>:
+
+void Endpoint::openForRx(EndpointType type, uint16_t maxPacketSize) const
+{
+ 100:	b580      	push	{r7, lr}
+ 102:	b084      	sub	sp, #16
+ 104:	af00      	add	r7, sp, #0
+ 106:	6078      	str	r0, [r7, #4]
+ 108:	0008      	movs	r0, r1
+ 10a:	0011      	movs	r1, r2
+ 10c:	1cbb      	adds	r3, r7, #2
+ 10e:	1c02      	adds	r2, r0, #0
+ 110:	801a      	strh	r2, [r3, #0]
+ 112:	003b      	movs	r3, r7
+ 114:	1c0a      	adds	r2, r1, #0
+ 116:	801a      	strh	r2, [r3, #0]
+	auto reg = getEndpointRegister();
+ 118:	687b      	ldr	r3, [r7, #4]
+ 11a:	0018      	movs	r0, r3
+ 11c:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 120:	0003      	movs	r3, r0
+ 122:	60fb      	str	r3, [r7, #12]
+
+	// set up the endpoint type and address
+
+	*reg = (*reg & USB_EP_T_MASK) | static_cast<uint16_t>(type);
+ 124:	68fb      	ldr	r3, [r7, #12]
+ 126:	881b      	ldrh	r3, [r3, #0]
+ 128:	b29b      	uxth	r3, r3
+ 12a:	b21b      	sxth	r3, r3
+ 12c:	4a29      	ldr	r2, [pc, #164]	; (1d4 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xd4>)
+ 12e:	4013      	ands	r3, r2
+ 130:	b21a      	sxth	r2, r3
+ 132:	1cbb      	adds	r3, r7, #2
+ 134:	2100      	movs	r1, #0
+ 136:	5e5b      	ldrsh	r3, [r3, r1]
+ 138:	4313      	orrs	r3, r2
+ 13a:	b21b      	sxth	r3, r3
+ 13c:	b29a      	uxth	r2, r3
+ 13e:	68fb      	ldr	r3, [r7, #12]
+ 140:	801a      	strh	r2, [r3, #0]
+	*reg = (*reg & USB_EPREG_MASK) | _number | USB_EP_CTR_RX;
+ 142:	68fb      	ldr	r3, [r7, #12]
+ 144:	881b      	ldrh	r3, [r3, #0]
+ 146:	b29b      	uxth	r3, r3
+ 148:	b21b      	sxth	r3, r3
+ 14a:	4a23      	ldr	r2, [pc, #140]	; (1d8 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xd8>)
+ 14c:	4013      	ands	r3, r2
+ 14e:	b21a      	sxth	r2, r3
+ 150:	687b      	ldr	r3, [r7, #4]
+ 152:	791b      	ldrb	r3, [r3, #4]
+ 154:	b21b      	sxth	r3, r3
+ 156:	4313      	orrs	r3, r2
+ 158:	b21b      	sxth	r3, r3
+ 15a:	4a20      	ldr	r2, [pc, #128]	; (1dc <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xdc>)
+ 15c:	4313      	orrs	r3, r2
+ 15e:	b21b      	sxth	r3, r3
+ 160:	b29a      	uxth	r2, r3
+ 162:	68fb      	ldr	r3, [r7, #12]
+ 164:	801a      	strh	r2, [r3, #0]
+
+	// set up the RX address in the BTABLE and initialise first packet read
+
+	endpointBufferDescriptionTable[_number].rx.addr = 0x18;
+ 166:	4b1e      	ldr	r3, [pc, #120]	; (1e0 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xe0>)
+ 168:	681a      	ldr	r2, [r3, #0]
+ 16a:	687b      	ldr	r3, [r7, #4]
+ 16c:	791b      	ldrb	r3, [r3, #4]
+ 16e:	00db      	lsls	r3, r3, #3
+ 170:	18d3      	adds	r3, r2, r3
+ 172:	2218      	movs	r2, #24
+ 174:	809a      	strh	r2, [r3, #4]
+	endpointBufferDescriptionTable[_number].rx.setRxCount(maxPacketSize);
+ 176:	4b1a      	ldr	r3, [pc, #104]	; (1e0 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xe0>)
+ 178:	681a      	ldr	r2, [r3, #0]
+ 17a:	687b      	ldr	r3, [r7, #4]
+ 17c:	791b      	ldrb	r3, [r3, #4]
+ 17e:	00db      	lsls	r3, r3, #3
+ 180:	18d3      	adds	r3, r2, r3
+ 182:	1d1a      	adds	r2, r3, #4
+ 184:	003b      	movs	r3, r7
+ 186:	881b      	ldrh	r3, [r3, #0]
+ 188:	0019      	movs	r1, r3
+ 18a:	0010      	movs	r0, r2
+ 18c:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+
+	// if DTOG_RX is 1 then we need to write 1 to toggle it to zero
+
+	if ((*reg & USB_EP_DTOG_RX) != 0)
+ 190:	68fb      	ldr	r3, [r7, #12]
+ 192:	881b      	ldrh	r3, [r3, #0]
+ 194:	b29b      	uxth	r3, r3
+ 196:	001a      	movs	r2, r3
+ 198:	2380      	movs	r3, #128	; 0x80
+ 19a:	01db      	lsls	r3, r3, #7
+ 19c:	4013      	ands	r3, r2
+ 19e:	1e5a      	subs	r2, r3, #1
+ 1a0:	4193      	sbcs	r3, r2
+ 1a2:	b2db      	uxtb	r3, r3
+ 1a4:	2b00      	cmp	r3, #0
+ 1a6:	d00c      	beq.n	1c2 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xc2>
+		*reg = (*reg & USB_EPREG_MASK) | USB_EP_CTR_RX | USB_EP_DTOG_RX;
+ 1a8:	68fb      	ldr	r3, [r7, #12]
+ 1aa:	881b      	ldrh	r3, [r3, #0]
+ 1ac:	b29b      	uxth	r3, r3
+ 1ae:	b21b      	sxth	r3, r3
+ 1b0:	4a0c      	ldr	r2, [pc, #48]	; (1e4 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xe4>)
+ 1b2:	4013      	ands	r3, r2
+ 1b4:	b21b      	sxth	r3, r3
+ 1b6:	4a0c      	ldr	r2, [pc, #48]	; (1e8 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt+0xe8>)
+ 1b8:	4313      	orrs	r3, r2
+ 1ba:	b21b      	sxth	r3, r3
+ 1bc:	b29a      	uxth	r2, r3
+ 1be:	68fb      	ldr	r3, [r7, #12]
+ 1c0:	801a      	strh	r2, [r3, #0]
+
+	// inititate reception of the first packet
+
+	setRxStatus(EndpointStatus::Valid);
+ 1c2:	687b      	ldr	r3, [r7, #4]
+ 1c4:	2103      	movs	r1, #3
+ 1c6:	0018      	movs	r0, r3
+ 1c8:	f7ff fffe 	bl	24c <_ZNK6USBLib8Endpoint11setRxStatusENS_14EndpointStatusE>
+}
+ 1cc:	46c0      	nop			; (mov r8, r8)
+ 1ce:	46bd      	mov	sp, r7
+ 1d0:	b004      	add	sp, #16
+ 1d2:	bd80      	pop	{r7, pc}
+ 1d4:	ffff898f 	.word	0xffff898f
+ 1d8:	ffff8f8f 	.word	0xffff8f8f
+ 1dc:	ffff8000 	.word	0xffff8000
+ 1e0:	00000000 	.word	0x00000000
+ 1e4:	00000f8f 	.word	0x00000f8f
+ 1e8:	ffffc000 	.word	0xffffc000
+
+000001ec <_ZNK6USBLib8Endpoint11setTxStatusENS_14EndpointStatusE>:
+
+void Endpoint::setTxStatus(EndpointStatus status) const
+{
+ 1ec:	b580      	push	{r7, lr}
+ 1ee:	b086      	sub	sp, #24
+ 1f0:	af00      	add	r7, sp, #0
+ 1f2:	6078      	str	r0, [r7, #4]
+ 1f4:	000a      	movs	r2, r1
+ 1f6:	1cbb      	adds	r3, r7, #2
+ 1f8:	801a      	strh	r2, [r3, #0]
+	auto reg = getEndpointRegister();
+ 1fa:	687b      	ldr	r3, [r7, #4]
+ 1fc:	0018      	movs	r0, r3
+ 1fe:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 202:	0003      	movs	r3, r0
+ 204:	617b      	str	r3, [r7, #20]
+	auto sts = static_cast<uint8_t>(status) << statTxBit;
+ 206:	1cbb      	adds	r3, r7, #2
+ 208:	881b      	ldrh	r3, [r3, #0]
+ 20a:	b2db      	uxtb	r3, r3
+ 20c:	011b      	lsls	r3, r3, #4
+ 20e:	613b      	str	r3, [r7, #16]
+
+	uint16_t tmp;
+
+	tmp = *reg & USB_EPTX_DTOGMASK;
+ 210:	697b      	ldr	r3, [r7, #20]
+ 212:	881b      	ldrh	r3, [r3, #0]
+ 214:	b29a      	uxth	r2, r3
+ 216:	230e      	movs	r3, #14
+ 218:	18fb      	adds	r3, r7, r3
+ 21a:	490a      	ldr	r1, [pc, #40]	; (244 <_ZNK6USBLib8Endpoint11setTxStatusENS_14EndpointStatusE+0x58>)
+ 21c:	400a      	ands	r2, r1
+ 21e:	801a      	strh	r2, [r3, #0]
+	*reg = (tmp ^ sts) | USB_EP_CTR_RX | USB_EP_CTR_TX;
+ 220:	693b      	ldr	r3, [r7, #16]
+ 222:	b21a      	sxth	r2, r3
+ 224:	230e      	movs	r3, #14
+ 226:	18fb      	adds	r3, r7, r3
+ 228:	2100      	movs	r1, #0
+ 22a:	5e5b      	ldrsh	r3, [r3, r1]
+ 22c:	4053      	eors	r3, r2
+ 22e:	b21b      	sxth	r3, r3
+ 230:	4a05      	ldr	r2, [pc, #20]	; (248 <_ZNK6USBLib8Endpoint11setTxStatusENS_14EndpointStatusE+0x5c>)
+ 232:	4313      	orrs	r3, r2
+ 234:	b21b      	sxth	r3, r3
+ 236:	b29a      	uxth	r2, r3
+ 238:	697b      	ldr	r3, [r7, #20]
+ 23a:	801a      	strh	r2, [r3, #0]
+}
+ 23c:	46c0      	nop			; (mov r8, r8)
+ 23e:	46bd      	mov	sp, r7
+ 240:	b006      	add	sp, #24
+ 242:	bd80      	pop	{r7, pc}
+ 244:	ffff8fbf 	.word	0xffff8fbf
+ 248:	ffff8080 	.word	0xffff8080
+
+0000024c <_ZNK6USBLib8Endpoint11setRxStatusENS_14EndpointStatusE>:
+
+void Endpoint::setRxStatus(EndpointStatus status) const
+{
+ 24c:	b580      	push	{r7, lr}
+ 24e:	b084      	sub	sp, #16
+ 250:	af00      	add	r7, sp, #0
+ 252:	6078      	str	r0, [r7, #4]
+ 254:	000a      	movs	r2, r1
+ 256:	1cbb      	adds	r3, r7, #2
+ 258:	801a      	strh	r2, [r3, #0]
+	auto reg = getEndpointRegister();
+ 25a:	687b      	ldr	r3, [r7, #4]
+ 25c:	0018      	movs	r0, r3
+ 25e:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 262:	0003      	movs	r3, r0
+ 264:	60fb      	str	r3, [r7, #12]
+	uint16_t sts = static_cast<uint8_t>(status) << statRxBit;
+ 266:	1cbb      	adds	r3, r7, #2
+ 268:	881b      	ldrh	r3, [r3, #0]
+ 26a:	b2db      	uxtb	r3, r3
+ 26c:	b29a      	uxth	r2, r3
+ 26e:	230a      	movs	r3, #10
+ 270:	18fb      	adds	r3, r7, r3
+ 272:	0312      	lsls	r2, r2, #12
+ 274:	801a      	strh	r2, [r3, #0]
+
+	uint16_t tmp;
+
+	tmp = *reg & USB_EPRX_DTOGMASK;
+ 276:	68fb      	ldr	r3, [r7, #12]
+ 278:	881b      	ldrh	r3, [r3, #0]
+ 27a:	b29a      	uxth	r2, r3
+ 27c:	2308      	movs	r3, #8
+ 27e:	18fb      	adds	r3, r7, r3
+ 280:	4909      	ldr	r1, [pc, #36]	; (2a8 <_ZNK6USBLib8Endpoint11setRxStatusENS_14EndpointStatusE+0x5c>)
+ 282:	400a      	ands	r2, r1
+ 284:	801a      	strh	r2, [r3, #0]
+	*reg = (tmp ^ sts) | USB_EP_CTR_RX | USB_EP_CTR_TX;
+ 286:	2308      	movs	r3, #8
+ 288:	18fa      	adds	r2, r7, r3
+ 28a:	230a      	movs	r3, #10
+ 28c:	18fb      	adds	r3, r7, r3
+ 28e:	8812      	ldrh	r2, [r2, #0]
+ 290:	881b      	ldrh	r3, [r3, #0]
+ 292:	4053      	eors	r3, r2
+ 294:	b29b      	uxth	r3, r3
+ 296:	4a05      	ldr	r2, [pc, #20]	; (2ac <_ZNK6USBLib8Endpoint11setRxStatusENS_14EndpointStatusE+0x60>)
+ 298:	4313      	orrs	r3, r2
+ 29a:	b29a      	uxth	r2, r3
+ 29c:	68fb      	ldr	r3, [r7, #12]
+ 29e:	801a      	strh	r2, [r3, #0]
+}
+ 2a0:	46c0      	nop			; (mov r8, r8)
+ 2a2:	46bd      	mov	sp, r7
+ 2a4:	b004      	add	sp, #16
+ 2a6:	bd80      	pop	{r7, pc}
+ 2a8:	ffffbf8f 	.word	0xffffbf8f
+ 2ac:	ffff8080 	.word	0xffff8080
+
+000002b0 <_ZNK6USBLib8Endpoint8readDataEPht>:
+
+uint16_t Endpoint::readData(uint8_t* buffer, uint16_t bufferSize) const
+{
+ 2b0:	b590      	push	{r4, r7, lr}
+ 2b2:	b08b      	sub	sp, #44	; 0x2c
+ 2b4:	af00      	add	r7, sp, #0
+ 2b6:	60f8      	str	r0, [r7, #12]
+ 2b8:	60b9      	str	r1, [r7, #8]
+ 2ba:	1dbb      	adds	r3, r7, #6
+ 2bc:	801a      	strh	r2, [r3, #0]
+	uint32_t i;
+
+	auto destptr = reinterpret_cast<uint16_t *>(buffer);
+ 2be:	68bb      	ldr	r3, [r7, #8]
+ 2c0:	623b      	str	r3, [r7, #32]
+	auto srcptr = reinterpret_cast<uint16_t *>(USB_PMAADDR
+			+ endpointBufferDescriptionTable[_number].rx.addr);
+ 2c2:	4b23      	ldr	r3, [pc, #140]	; (350 <_ZNK6USBLib8Endpoint8readDataEPht+0xa0>)
+ 2c4:	681a      	ldr	r2, [r3, #0]
+ 2c6:	68fb      	ldr	r3, [r7, #12]
+ 2c8:	791b      	ldrb	r3, [r3, #4]
+ 2ca:	00db      	lsls	r3, r3, #3
+ 2cc:	18d3      	adds	r3, r2, r3
+ 2ce:	889b      	ldrh	r3, [r3, #4]
+ 2d0:	b29b      	uxth	r3, r3
+ 2d2:	4a20      	ldr	r2, [pc, #128]	; (354 <_ZNK6USBLib8Endpoint8readDataEPht+0xa4>)
+ 2d4:	4694      	mov	ip, r2
+ 2d6:	4463      	add	r3, ip
+ 2d8:	61fb      	str	r3, [r7, #28]
+
+	auto bytesToRead = endpointBufferDescriptionTable[_number].rx.getCount();
+ 2da:	4b1d      	ldr	r3, [pc, #116]	; (350 <_ZNK6USBLib8Endpoint8readDataEPht+0xa0>)
+ 2dc:	681a      	ldr	r2, [r3, #0]
+ 2de:	68fb      	ldr	r3, [r7, #12]
+ 2e0:	791b      	ldrb	r3, [r3, #4]
+ 2e2:	00db      	lsls	r3, r3, #3
+ 2e4:	18d3      	adds	r3, r2, r3
+ 2e6:	3304      	adds	r3, #4
+ 2e8:	221a      	movs	r2, #26
+ 2ea:	18bc      	adds	r4, r7, r2
+ 2ec:	0018      	movs	r0, r3
+ 2ee:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 2f2:	0003      	movs	r3, r0
+ 2f4:	8023      	strh	r3, [r4, #0]
+
+	for (i = (bytesToRead + 1) / 2; i > 0; i--)
+ 2f6:	231a      	movs	r3, #26
+ 2f8:	18fb      	adds	r3, r7, r3
+ 2fa:	881b      	ldrh	r3, [r3, #0]
+ 2fc:	3301      	adds	r3, #1
+ 2fe:	2b00      	cmp	r3, #0
+ 300:	da00      	bge.n	304 <_ZNK6USBLib8Endpoint8readDataEPht+0x54>
+ 302:	3301      	adds	r3, #1
+ 304:	105b      	asrs	r3, r3, #1
+ 306:	627b      	str	r3, [r7, #36]	; 0x24
+ 308:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 30a:	2b00      	cmp	r3, #0
+ 30c:	d00b      	beq.n	326 <_ZNK6USBLib8Endpoint8readDataEPht+0x76>
+		*destptr++ = *srcptr++;
+ 30e:	6a3b      	ldr	r3, [r7, #32]
+ 310:	1c9a      	adds	r2, r3, #2
+ 312:	623a      	str	r2, [r7, #32]
+ 314:	69fa      	ldr	r2, [r7, #28]
+ 316:	1c91      	adds	r1, r2, #2
+ 318:	61f9      	str	r1, [r7, #28]
+ 31a:	8812      	ldrh	r2, [r2, #0]
+ 31c:	801a      	strh	r2, [r3, #0]
+	for (i = (bytesToRead + 1) / 2; i > 0; i--)
+ 31e:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 320:	3b01      	subs	r3, #1
+ 322:	627b      	str	r3, [r7, #36]	; 0x24
+ 324:	e7f0      	b.n	308 <_ZNK6USBLib8Endpoint8readDataEPht+0x58>
+
+	auto endpointReg = getEndpointRegister();
+ 326:	68fb      	ldr	r3, [r7, #12]
+ 328:	0018      	movs	r0, r3
+ 32a:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 32e:	0003      	movs	r3, r0
+ 330:	617b      	str	r3, [r7, #20]
+
+	*endpointReg = *endpointReg & ~(USB_EP_CTR_RX) & USB_EPREG_MASK;
+ 332:	697b      	ldr	r3, [r7, #20]
+ 334:	881b      	ldrh	r3, [r3, #0]
+ 336:	b29b      	uxth	r3, r3
+ 338:	4a07      	ldr	r2, [pc, #28]	; (358 <_ZNK6USBLib8Endpoint8readDataEPht+0xa8>)
+ 33a:	4013      	ands	r3, r2
+ 33c:	b29a      	uxth	r2, r3
+ 33e:	697b      	ldr	r3, [r7, #20]
+ 340:	801a      	strh	r2, [r3, #0]
+
+	return bytesToRead;
+ 342:	231a      	movs	r3, #26
+ 344:	18fb      	adds	r3, r7, r3
+ 346:	881b      	ldrh	r3, [r3, #0]
+}
+ 348:	0018      	movs	r0, r3
+ 34a:	46bd      	mov	sp, r7
+ 34c:	b00b      	add	sp, #44	; 0x2c
+ 34e:	bd90      	pop	{r4, r7, pc}
+ 350:	00000000 	.word	0x00000000
+ 354:	40006000 	.word	0x40006000
+ 358:	00000f8f 	.word	0x00000f8f
+
+0000035c <_ZNK6USBLib8Endpoint5writeEPKht>:
+
+bool Endpoint::write(const uint8_t* data, uint16_t len) const
+{
+ 35c:	b580      	push	{r7, lr}
+ 35e:	b088      	sub	sp, #32
+ 360:	af00      	add	r7, sp, #0
+ 362:	60f8      	str	r0, [r7, #12]
+ 364:	60b9      	str	r1, [r7, #8]
+ 366:	1dbb      	adds	r3, r7, #6
+ 368:	801a      	strh	r2, [r3, #0]
+	auto n = (len + 1) / 2;
+ 36a:	1dbb      	adds	r3, r7, #6
+ 36c:	881b      	ldrh	r3, [r3, #0]
+ 36e:	3301      	adds	r3, #1
+ 370:	2b00      	cmp	r3, #0
+ 372:	da00      	bge.n	376 <_ZNK6USBLib8Endpoint5writeEPKht+0x1a>
+ 374:	3301      	adds	r3, #1
+ 376:	105b      	asrs	r3, r3, #1
+ 378:	617b      	str	r3, [r7, #20]
+
+	auto destptr = reinterpret_cast<uint16_t *>(USB_PMAADDR
+			+ endpointBufferDescriptionTable[_number].tx.addr);
+ 37a:	4b1f      	ldr	r3, [pc, #124]	; (3f8 <_ZNK6USBLib8Endpoint5writeEPKht+0x9c>)
+ 37c:	681a      	ldr	r2, [r3, #0]
+ 37e:	68fb      	ldr	r3, [r7, #12]
+ 380:	791b      	ldrb	r3, [r3, #4]
+ 382:	00db      	lsls	r3, r3, #3
+ 384:	18d3      	adds	r3, r2, r3
+ 386:	881b      	ldrh	r3, [r3, #0]
+ 388:	b29b      	uxth	r3, r3
+ 38a:	4a1c      	ldr	r2, [pc, #112]	; (3fc <_ZNK6USBLib8Endpoint5writeEPKht+0xa0>)
+ 38c:	4694      	mov	ip, r2
+ 38e:	4463      	add	r3, ip
+ 390:	61fb      	str	r3, [r7, #28]
+
+	for (auto i = n; i != 0; i--)
+ 392:	697b      	ldr	r3, [r7, #20]
+ 394:	61bb      	str	r3, [r7, #24]
+ 396:	69bb      	ldr	r3, [r7, #24]
+ 398:	2b00      	cmp	r3, #0
+ 39a:	d01a      	beq.n	3d2 <_ZNK6USBLib8Endpoint5writeEPKht+0x76>
+	{
+		uint16_t word = data[0] | ((uint16_t) data[1] << 8);
+ 39c:	68bb      	ldr	r3, [r7, #8]
+ 39e:	781b      	ldrb	r3, [r3, #0]
+ 3a0:	b21a      	sxth	r2, r3
+ 3a2:	68bb      	ldr	r3, [r7, #8]
+ 3a4:	3301      	adds	r3, #1
+ 3a6:	781b      	ldrb	r3, [r3, #0]
+ 3a8:	021b      	lsls	r3, r3, #8
+ 3aa:	b21b      	sxth	r3, r3
+ 3ac:	4313      	orrs	r3, r2
+ 3ae:	b21a      	sxth	r2, r3
+ 3b0:	2312      	movs	r3, #18
+ 3b2:	18fb      	adds	r3, r7, r3
+ 3b4:	801a      	strh	r2, [r3, #0]
+		*destptr++ = word;
+ 3b6:	69fb      	ldr	r3, [r7, #28]
+ 3b8:	1c9a      	adds	r2, r3, #2
+ 3ba:	61fa      	str	r2, [r7, #28]
+ 3bc:	2212      	movs	r2, #18
+ 3be:	18ba      	adds	r2, r7, r2
+ 3c0:	8812      	ldrh	r2, [r2, #0]
+ 3c2:	801a      	strh	r2, [r3, #0]
+		data += 2;
+ 3c4:	68bb      	ldr	r3, [r7, #8]
+ 3c6:	3302      	adds	r3, #2
+ 3c8:	60bb      	str	r3, [r7, #8]
+	for (auto i = n; i != 0; i--)
+ 3ca:	69bb      	ldr	r3, [r7, #24]
+ 3cc:	3b01      	subs	r3, #1
+ 3ce:	61bb      	str	r3, [r7, #24]
+ 3d0:	e7e1      	b.n	396 <_ZNK6USBLib8Endpoint5writeEPKht+0x3a>
+	}
+
+	endpointBufferDescriptionTable[_number].tx.count = len;
+ 3d2:	4b09      	ldr	r3, [pc, #36]	; (3f8 <_ZNK6USBLib8Endpoint5writeEPKht+0x9c>)
+ 3d4:	681a      	ldr	r2, [r3, #0]
+ 3d6:	68fb      	ldr	r3, [r7, #12]
+ 3d8:	791b      	ldrb	r3, [r3, #4]
+ 3da:	00db      	lsls	r3, r3, #3
+ 3dc:	18d3      	adds	r3, r2, r3
+ 3de:	1dba      	adds	r2, r7, #6
+ 3e0:	8812      	ldrh	r2, [r2, #0]
+ 3e2:	805a      	strh	r2, [r3, #2]
+	setTxStatus(EndpointStatus::Valid);
+ 3e4:	68fb      	ldr	r3, [r7, #12]
+ 3e6:	2103      	movs	r1, #3
+ 3e8:	0018      	movs	r0, r3
+ 3ea:	f7ff fffe 	bl	1ec <_ZNK6USBLib8Endpoint11setTxStatusENS_14EndpointStatusE>
+}
+ 3ee:	46c0      	nop			; (mov r8, r8)
+ 3f0:	0018      	movs	r0, r3
+ 3f2:	46bd      	mov	sp, r7
+ 3f4:	b008      	add	sp, #32
+ 3f6:	bd80      	pop	{r7, pc}
+ 3f8:	00000000 	.word	0x00000000
+ 3fc:	40006000 	.word	0x40006000
+
+00000400 <_ZNK6USBLib8Endpoint4readEv>:
+
+void Endpoint::read() const
+{
+ 400:	b580      	push	{r7, lr}
+ 402:	b082      	sub	sp, #8
+ 404:	af00      	add	r7, sp, #0
+ 406:	6078      	str	r0, [r7, #4]
+	endpointBufferDescriptionTable[_number].rx.setRxCount(64);
+ 408:	4b09      	ldr	r3, [pc, #36]	; (430 <_ZNK6USBLib8Endpoint4readEv+0x30>)
+ 40a:	681a      	ldr	r2, [r3, #0]
+ 40c:	687b      	ldr	r3, [r7, #4]
+ 40e:	791b      	ldrb	r3, [r3, #4]
+ 410:	00db      	lsls	r3, r3, #3
+ 412:	18d3      	adds	r3, r2, r3
+ 414:	3304      	adds	r3, #4
+ 416:	2140      	movs	r1, #64	; 0x40
+ 418:	0018      	movs	r0, r3
+ 41a:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+	setRxStatus(EndpointStatus::Valid);
+ 41e:	687b      	ldr	r3, [r7, #4]
+ 420:	2103      	movs	r1, #3
+ 422:	0018      	movs	r0, r3
+ 424:	f7ff fffe 	bl	24c <_ZNK6USBLib8Endpoint11setRxStatusENS_14EndpointStatusE>
+}
+ 428:	46c0      	nop			; (mov r8, r8)
+ 42a:	46bd      	mov	sp, r7
+ 42c:	b002      	add	sp, #8
+ 42e:	bd80      	pop	{r7, pc}
+ 430:	00000000 	.word	0x00000000
+
+00000434 <_ZN6USBLib8EndpointD1Ev>:
+
+Endpoint::~Endpoint()
+ 434:	b580      	push	{r7, lr}
+ 436:	b082      	sub	sp, #8
+ 438:	af00      	add	r7, sp, #0
+ 43a:	6078      	str	r0, [r7, #4]
+ 43c:	4a03      	ldr	r2, [pc, #12]	; (44c <_ZN6USBLib8EndpointD1Ev+0x18>)
+ 43e:	687b      	ldr	r3, [r7, #4]
+ 440:	601a      	str	r2, [r3, #0]
+{
+	// TODO Auto-generated destructor stub
+}
+ 442:	687b      	ldr	r3, [r7, #4]
+ 444:	0018      	movs	r0, r3
+ 446:	46bd      	mov	sp, r7
+ 448:	b002      	add	sp, #8
+ 44a:	bd80      	pop	{r7, pc}
+ 44c:	00000008 	.word	0x00000008
+
+00000450 <_ZN6USBLib8EndpointD0Ev>:
+Endpoint::~Endpoint()
+ 450:	b580      	push	{r7, lr}
+ 452:	b082      	sub	sp, #8
+ 454:	af00      	add	r7, sp, #0
+ 456:	6078      	str	r0, [r7, #4]
+}
+ 458:	687b      	ldr	r3, [r7, #4]
+ 45a:	0018      	movs	r0, r3
+ 45c:	f7ff fffe 	bl	434 <_ZN6USBLib8EndpointD1Ev>
+ 460:	687b      	ldr	r3, [r7, #4]
+ 462:	2108      	movs	r1, #8
+ 464:	0018      	movs	r0, r3
+ 466:	f7ff fffe 	bl	0 <_ZdlPvj>
+ 46a:	687b      	ldr	r3, [r7, #4]
+ 46c:	0018      	movs	r0, r3
+ 46e:	46bd      	mov	sp, r7
+ 470:	b002      	add	sp, #8
+ 472:	bd80      	pop	{r7, pc}
+
+00000474 <__tcf_0>:
+const Endpoint endpoints[] =
+ 474:	b590      	push	{r4, r7, lr}
+ 476:	b083      	sub	sp, #12
+ 478:	af00      	add	r7, sp, #0
+ 47a:	6078      	str	r0, [r7, #4]
+ 47c:	4c06      	ldr	r4, [pc, #24]	; (498 <__tcf_0+0x24>)
+ 47e:	4b07      	ldr	r3, [pc, #28]	; (49c <__tcf_0+0x28>)
+ 480:	429c      	cmp	r4, r3
+ 482:	d005      	beq.n	490 <__tcf_0+0x1c>
+ 484:	3c08      	subs	r4, #8
+ 486:	6823      	ldr	r3, [r4, #0]
+ 488:	681b      	ldr	r3, [r3, #0]
+ 48a:	0020      	movs	r0, r4
+ 48c:	4798      	blx	r3
+ 48e:	e7f6      	b.n	47e <__tcf_0+0xa>
+ 490:	46bd      	mov	sp, r7
+ 492:	b003      	add	sp, #12
+ 494:	bd90      	pop	{r4, r7, pc}
+ 496:	46c0      	nop			; (mov r8, r8)
+ 498:	00000040 	.word	0x00000040
+ 49c:	00000000 	.word	0x00000000
+
+000004a0 <_Z41__static_initialization_and_destruction_0ii>:
+
+} /* namespace USB */
+ 4a0:	b5f0      	push	{r4, r5, r6, r7, lr}
+ 4a2:	b083      	sub	sp, #12
+ 4a4:	af00      	add	r7, sp, #0
+ 4a6:	6078      	str	r0, [r7, #4]
+ 4a8:	6039      	str	r1, [r7, #0]
+ 4aa:	687b      	ldr	r3, [r7, #4]
+ 4ac:	2b01      	cmp	r3, #1
+ 4ae:	d149      	bne.n	544 <_Z41__static_initialization_and_destruction_0ii+0xa4>
+ 4b0:	683b      	ldr	r3, [r7, #0]
+ 4b2:	4a26      	ldr	r2, [pc, #152]	; (54c <_Z41__static_initialization_and_destruction_0ii+0xac>)
+ 4b4:	4293      	cmp	r3, r2
+ 4b6:	d145      	bne.n	544 <_Z41__static_initialization_and_destruction_0ii+0xa4>
+		reinterpret_cast<void*>(USB_PMAADDR)) EndpointBufferDescription[8];
+ 4b8:	4b25      	ldr	r3, [pc, #148]	; (550 <_Z41__static_initialization_and_destruction_0ii+0xb0>)
+ 4ba:	0019      	movs	r1, r3
+ 4bc:	2040      	movs	r0, #64	; 0x40
+ 4be:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 4c2:	1e06      	subs	r6, r0, #0
+volatile EndpointBufferDescription* endpointBufferDescriptionTable = new (
+ 4c4:	d00c      	beq.n	4e0 <_Z41__static_initialization_and_destruction_0ii+0x40>
+		reinterpret_cast<void*>(USB_PMAADDR)) EndpointBufferDescription[8];
+ 4c6:	0033      	movs	r3, r6
+ 4c8:	2407      	movs	r4, #7
+ 4ca:	001d      	movs	r5, r3
+ 4cc:	2c00      	cmp	r4, #0
+ 4ce:	db05      	blt.n	4dc <_Z41__static_initialization_and_destruction_0ii+0x3c>
+ 4d0:	0028      	movs	r0, r5
+ 4d2:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 4d6:	3508      	adds	r5, #8
+ 4d8:	3c01      	subs	r4, #1
+ 4da:	e7f7      	b.n	4cc <_Z41__static_initialization_and_destruction_0ii+0x2c>
+volatile EndpointBufferDescription* endpointBufferDescriptionTable = new (
+ 4dc:	0032      	movs	r2, r6
+ 4de:	e000      	b.n	4e2 <_Z41__static_initialization_and_destruction_0ii+0x42>
+ 4e0:	0032      	movs	r2, r6
+ 4e2:	4b1c      	ldr	r3, [pc, #112]	; (554 <_Z41__static_initialization_and_destruction_0ii+0xb4>)
+ 4e4:	601a      	str	r2, [r3, #0]
+{ 0, 1, 2, 3, 4, 5, 6, 7 };
+ 4e6:	4c1c      	ldr	r4, [pc, #112]	; (558 <_Z41__static_initialization_and_destruction_0ii+0xb8>)
+ 4e8:	2100      	movs	r1, #0
+ 4ea:	0020      	movs	r0, r4
+ 4ec:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 4f0:	3408      	adds	r4, #8
+ 4f2:	2101      	movs	r1, #1
+ 4f4:	0020      	movs	r0, r4
+ 4f6:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 4fa:	3408      	adds	r4, #8
+ 4fc:	2102      	movs	r1, #2
+ 4fe:	0020      	movs	r0, r4
+ 500:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 504:	3408      	adds	r4, #8
+ 506:	2103      	movs	r1, #3
+ 508:	0020      	movs	r0, r4
+ 50a:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 50e:	3408      	adds	r4, #8
+ 510:	2104      	movs	r1, #4
+ 512:	0020      	movs	r0, r4
+ 514:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 518:	3408      	adds	r4, #8
+ 51a:	2105      	movs	r1, #5
+ 51c:	0020      	movs	r0, r4
+ 51e:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 522:	3408      	adds	r4, #8
+ 524:	2106      	movs	r1, #6
+ 526:	0020      	movs	r0, r4
+ 528:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+ 52c:	0023      	movs	r3, r4
+ 52e:	3308      	adds	r3, #8
+ 530:	2107      	movs	r1, #7
+ 532:	0018      	movs	r0, r3
+ 534:	f7ff fffe 	bl	0 <_ZN6USBLib8EndpointC1Eh>
+const Endpoint endpoints[] =
+ 538:	4a08      	ldr	r2, [pc, #32]	; (55c <_Z41__static_initialization_and_destruction_0ii+0xbc>)
+ 53a:	4b09      	ldr	r3, [pc, #36]	; (560 <_Z41__static_initialization_and_destruction_0ii+0xc0>)
+ 53c:	0019      	movs	r1, r3
+ 53e:	2000      	movs	r0, #0
+ 540:	f7ff fffe 	bl	0 <__aeabi_atexit>
+} /* namespace USB */
+ 544:	46c0      	nop			; (mov r8, r8)
+ 546:	46bd      	mov	sp, r7
+ 548:	b003      	add	sp, #12
+ 54a:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 54c:	0000ffff 	.word	0x0000ffff
+ 550:	40006000 	.word	0x40006000
+	...
+
+00000564 <_GLOBAL__sub_I__ZN6USBLib30endpointBufferDescriptionTableE>:
+ 564:	b580      	push	{r7, lr}
+ 566:	af00      	add	r7, sp, #0
+ 568:	4b03      	ldr	r3, [pc, #12]	; (578 <_GLOBAL__sub_I__ZN6USBLib30endpointBufferDescriptionTableE+0x14>)
+ 56a:	0019      	movs	r1, r3
+ 56c:	2001      	movs	r0, #1
+ 56e:	f7ff ff97 	bl	4a0 <_Z41__static_initialization_and_destruction_0ii>
+ 572:	46bd      	mov	sp, r7
+ 574:	bd80      	pop	{r7, pc}
+ 576:	46c0      	nop			; (mov r8, r8)
+ 578:	0000ffff 	.word	0x0000ffff
+
+Disassembly of section .text._ZNV6USBLib30UsbBufferDescriptionTableEntry8getCountEv:
+
+00000000 <_ZNV6USBLib30UsbBufferDescriptionTableEntry8getCountEv>:
+Endpoint::Endpoint(uint8_t number) :
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	687b      	ldr	r3, [r7, #4]
+   a:	885b      	ldrh	r3, [r3, #2]
+   c:	b29b      	uxth	r3, r3
+		{ number }
+   e:	059b      	lsls	r3, r3, #22
+  10:	0d9b      	lsrs	r3, r3, #22
+  12:	b29b      	uxth	r3, r3
+  14:	0018      	movs	r0, r3
+  16:	46bd      	mov	sp, r7
+  18:	b002      	add	sp, #8
+  1a:	bd80      	pop	{r7, pc}
+
+Disassembly of section .text._ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi:
+
+00000000 <_ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi>:
+Endpoint::Endpoint(uint8_t number) :
+   0:	b580      	push	{r7, lr}
+   2:	b084      	sub	sp, #16
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	6039      	str	r1, [r7, #0]
+   a:	683b      	ldr	r3, [r7, #0]
+   c:	2b3e      	cmp	r3, #62	; 0x3e
+		{ number }
+   e:	dd1b      	ble.n	48 <_ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi+0x48>
+  10:	683b      	ldr	r3, [r7, #0]
+  12:	115a      	asrs	r2, r3, #5
+  14:	230e      	movs	r3, #14
+  16:	18fb      	adds	r3, r7, r3
+  18:	801a      	strh	r2, [r3, #0]
+  1a:	683b      	ldr	r3, [r7, #0]
+}
+  1c:	221f      	movs	r2, #31
+  1e:	4013      	ands	r3, r2
+  20:	d106      	bne.n	30 <_ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi+0x30>
+  22:	230e      	movs	r3, #14
+  24:	18fb      	adds	r3, r7, r3
+  26:	881a      	ldrh	r2, [r3, #0]
+  28:	230e      	movs	r3, #14
+  2a:	18fb      	adds	r3, r7, r3
+{
+  2c:	3a01      	subs	r2, #1
+  2e:	801a      	strh	r2, [r3, #0]
+  30:	230e      	movs	r3, #14
+  32:	18fb      	adds	r3, r7, r3
+}
+  34:	881b      	ldrh	r3, [r3, #0]
+  36:	029b      	lsls	r3, r3, #10
+  38:	b21b      	sxth	r3, r3
+  3a:	4a11      	ldr	r2, [pc, #68]	; (80 <_ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi+0x80>)
+{
+  3c:	4313      	orrs	r3, r2
+  3e:	b21b      	sxth	r3, r3
+  40:	b29a      	uxth	r2, r3
+  42:	687b      	ldr	r3, [r7, #4]
+  44:	805a      	strh	r2, [r3, #2]
+  46:	e016      	b.n	76 <_ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi+0x76>
+  48:	683b      	ldr	r3, [r7, #0]
+  4a:	105a      	asrs	r2, r3, #1
+  4c:	230e      	movs	r3, #14
+  4e:	18fb      	adds	r3, r7, r3
+  50:	801a      	strh	r2, [r3, #0]
+  52:	683b      	ldr	r3, [r7, #0]
+	auto reg = reinterpret_cast<uint16_t*>(USB + 4 * _number);
+  54:	2201      	movs	r2, #1
+  56:	4013      	ands	r3, r2
+  58:	d006      	beq.n	68 <_ZNV6USBLib30UsbBufferDescriptionTableEntry10setRxCountEi+0x68>
+  5a:	230e      	movs	r3, #14
+  5c:	18fb      	adds	r3, r7, r3
+  5e:	881a      	ldrh	r2, [r3, #0]
+  60:	230e      	movs	r3, #14
+  62:	18fb      	adds	r3, r7, r3
+  64:	3201      	adds	r2, #1
+  66:	801a      	strh	r2, [r3, #0]
+	*reg = (*reg & USB_EP_T_MASK) | static_cast<uint16_t>(type);
+  68:	230e      	movs	r3, #14
+  6a:	18fb      	adds	r3, r7, r3
+  6c:	881b      	ldrh	r3, [r3, #0]
+  6e:	029b      	lsls	r3, r3, #10
+  70:	b29a      	uxth	r2, r3
+  72:	687b      	ldr	r3, [r7, #4]
+  74:	805a      	strh	r2, [r3, #2]
+  76:	46c0      	nop			; (mov r8, r8)
+  78:	46bd      	mov	sp, r7
+  7a:	b004      	add	sp, #16
+  7c:	bd80      	pop	{r7, pc}
+  7e:	46c0      	nop			; (mov r8, r8)
+  80:	ffff8000 	.word	0xffff8000
+
+Disassembly of section .text._ZNK6USBLib8Endpoint19getEndpointRegisterEv:
+
+00000000 <_ZNK6USBLib8Endpoint19getEndpointRegisterEv>:
+Endpoint::Endpoint(uint8_t number) :
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	687b      	ldr	r3, [r7, #4]
+   a:	791b      	ldrb	r3, [r3, #4]
+   c:	001a      	movs	r2, r3
+		{ number }
+   e:	23b8      	movs	r3, #184	; 0xb8
+  10:	005b      	lsls	r3, r3, #1
+  12:	4353      	muls	r3, r2
+  14:	4a03      	ldr	r2, [pc, #12]	; (24 <_ZNK6USBLib8Endpoint19getEndpointRegisterEv+0x24>)
+  16:	4694      	mov	ip, r2
+  18:	4463      	add	r3, ip
+  1a:	0018      	movs	r0, r3
+}
+  1c:	46bd      	mov	sp, r7
+  1e:	b002      	add	sp, #8
+  20:	bd80      	pop	{r7, pc}
+  22:	46c0      	nop			; (mov r8, r8)
+  24:	40005c00 	.word	0x40005c00
+
+Disassembly of section .text._ZnajPv:
+
+00000000 <_ZnajPv>:
+Endpoint::Endpoint(uint8_t number) :
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	6039      	str	r1, [r7, #0]
+   a:	683b      	ldr	r3, [r7, #0]
+   c:	0018      	movs	r0, r3
+		{ number }
+   e:	46bd      	mov	sp, r7
+  10:	b002      	add	sp, #8
+  12:	bd80      	pop	{r7, pc}
+
+Disassembly of section .text._ZN6USBLib25EndpointBufferDescriptionC2Ev:
+
+00000000 <_ZN6USBLib25EndpointBufferDescriptionC1Ev>:
+Endpoint::Endpoint(uint8_t number) :
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	687b      	ldr	r3, [r7, #4]
+   a:	0018      	movs	r0, r3
+   c:	46bd      	mov	sp, r7
+		{ number }
+   e:	b002      	add	sp, #8
+  10:	bd80      	pop	{r7, pc}
+
+USBLowLevel_STM32F0.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <_ZL20__gthread_key_deletei>:
+  return 0;
+}
+
+static int _GLIBCXX_UNUSED
+__gthread_key_delete (__gthread_key_t __key _GLIBCXX_UNUSED)
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	2300      	movs	r3, #0
+}
+   a:	0018      	movs	r0, r3
+   c:	46bd      	mov	sp, r7
+   e:	b002      	add	sp, #8
+  10:	bd80      	pop	{r7, pc}
+
+00000012 <NVIC_EnableIRQ>:
+    The interrupt number cannot be a negative value. 
+
+    \param [in]      IRQn  Number of the external interrupt to enable
+ */
+static __INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
+{
+  12:	b580      	push	{r7, lr}
+  14:	b082      	sub	sp, #8
+  16:	af00      	add	r7, sp, #0
+  18:	0002      	movs	r2, r0
+  1a:	1dfb      	adds	r3, r7, #7
+  1c:	701a      	strb	r2, [r3, #0]
+  NVIC->ISER[0] = (1 << ((uint32_t)(IRQn) & 0x1F));
+  1e:	4b08      	ldr	r3, [pc, #32]	; (40 <NVIC_EnableIRQ+0x2e>)
+  20:	1dfa      	adds	r2, r7, #7
+  22:	7812      	ldrb	r2, [r2, #0]
+  24:	b252      	sxtb	r2, r2
+  26:	b2d2      	uxtb	r2, r2
+  28:	0011      	movs	r1, r2
+  2a:	221f      	movs	r2, #31
+  2c:	400a      	ands	r2, r1
+  2e:	2101      	movs	r1, #1
+  30:	4091      	lsls	r1, r2
+  32:	000a      	movs	r2, r1
+  34:	601a      	str	r2, [r3, #0]
+}
+  36:	46c0      	nop			; (mov r8, r8)
+  38:	46bd      	mov	sp, r7
+  3a:	b002      	add	sp, #8
+  3c:	bd80      	pop	{r7, pc}
+  3e:	46c0      	nop			; (mov r8, r8)
+  40:	e000e100 	.word	0xe000e100
+
+00000044 <_ZN6USBLib19USBLowLevel_STM32F0C1Ev>:
+#include "stm32f042x6.h"
+
+namespace USBLib
+{
+
+USBLowLevel_STM32F0::USBLowLevel_STM32F0()
+  44:	b580      	push	{r7, lr}
+  46:	b082      	sub	sp, #8
+  48:	af00      	add	r7, sp, #0
+  4a:	6078      	str	r0, [r7, #4]
+  4c:	687b      	ldr	r3, [r7, #4]
+  4e:	0018      	movs	r0, r3
+  50:	f7ff fffe 	bl	0 <_ZL20__gthread_key_deletei>
+  54:	4a03      	ldr	r2, [pc, #12]	; (64 <_ZN6USBLib19USBLowLevel_STM32F0C1Ev+0x20>)
+  56:	687b      	ldr	r3, [r7, #4]
+  58:	601a      	str	r2, [r3, #0]
+{
+	// TODO Auto-generated constructor stub
+
+}
+  5a:	687b      	ldr	r3, [r7, #4]
+  5c:	0018      	movs	r0, r3
+  5e:	46bd      	mov	sp, r7
+  60:	b002      	add	sp, #8
+  62:	bd80      	pop	{r7, pc}
+  64:	00000008 	.word	0x00000008
+
+00000068 <_ZN6USBLib19USBLowLevel_STM32F0D1Ev>:
+
+USBLowLevel_STM32F0::~USBLowLevel_STM32F0()
+  68:	b580      	push	{r7, lr}
+  6a:	b082      	sub	sp, #8
+  6c:	af00      	add	r7, sp, #0
+  6e:	6078      	str	r0, [r7, #4]
+  70:	4a05      	ldr	r2, [pc, #20]	; (88 <_ZN6USBLib19USBLowLevel_STM32F0D1Ev+0x20>)
+  72:	687b      	ldr	r3, [r7, #4]
+  74:	601a      	str	r2, [r3, #0]
+  76:	687b      	ldr	r3, [r7, #4]
+  78:	0018      	movs	r0, r3
+  7a:	f7ff fffe 	bl	0 <_ZL20__gthread_key_deletei>
+{
+	// TODO Auto-generated destructor stub
+}
+  7e:	687b      	ldr	r3, [r7, #4]
+  80:	0018      	movs	r0, r3
+  82:	46bd      	mov	sp, r7
+  84:	b002      	add	sp, #8
+  86:	bd80      	pop	{r7, pc}
+  88:	00000008 	.word	0x00000008
+
+0000008c <_ZN6USBLib19USBLowLevel_STM32F0D0Ev>:
+USBLowLevel_STM32F0::~USBLowLevel_STM32F0()
+  8c:	b580      	push	{r7, lr}
+  8e:	b082      	sub	sp, #8
+  90:	af00      	add	r7, sp, #0
+  92:	6078      	str	r0, [r7, #4]
+}
+  94:	687b      	ldr	r3, [r7, #4]
+  96:	0018      	movs	r0, r3
+  98:	f7ff fffe 	bl	68 <_ZN6USBLib19USBLowLevel_STM32F0D1Ev>
+  9c:	687b      	ldr	r3, [r7, #4]
+  9e:	2108      	movs	r1, #8
+  a0:	0018      	movs	r0, r3
+  a2:	f7ff fffe 	bl	0 <_ZdlPvj>
+  a6:	687b      	ldr	r3, [r7, #4]
+  a8:	0018      	movs	r0, r3
+  aa:	46bd      	mov	sp, r7
+  ac:	b002      	add	sp, #8
+  ae:	bd80      	pop	{r7, pc}
+
+000000b0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv>:
+
+void USBLowLevel_STM32F0::_usbISR()
+{
+  b0:	b580      	push	{r7, lr}
+  b2:	b082      	sub	sp, #8
+  b4:	af00      	add	r7, sp, #0
+  b6:	6078      	str	r0, [r7, #4]
+	// correct endpoint transfer
+	if ((USB->ISTR & USB_ISTR_CTR) != 0)
+  b8:	4a43      	ldr	r2, [pc, #268]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+  ba:	2344      	movs	r3, #68	; 0x44
+  bc:	5ad3      	ldrh	r3, [r2, r3]
+  be:	b29b      	uxth	r3, r3
+  c0:	b21b      	sxth	r3, r3
+  c2:	b29b      	uxth	r3, r3
+  c4:	0bdb      	lsrs	r3, r3, #15
+  c6:	b2db      	uxtb	r3, r3
+  c8:	2b00      	cmp	r3, #0
+  ca:	d003      	beq.n	d4 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x24>
+	{
+		onCorrectTransfer();
+  cc:	687b      	ldr	r3, [r7, #4]
+  ce:	0018      	movs	r0, r3
+  d0:	f7ff fffe 	bl	1d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv>
+	}
+
+	// reset
+	if ((USB->ISTR & USB_ISTR_RESET) != 0)
+  d4:	4a3c      	ldr	r2, [pc, #240]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+  d6:	2344      	movs	r3, #68	; 0x44
+  d8:	5ad3      	ldrh	r3, [r2, r3]
+  da:	b29b      	uxth	r3, r3
+  dc:	001a      	movs	r2, r3
+  de:	2380      	movs	r3, #128	; 0x80
+  e0:	00db      	lsls	r3, r3, #3
+  e2:	4013      	ands	r3, r2
+  e4:	1e5a      	subs	r2, r3, #1
+  e6:	4193      	sbcs	r3, r2
+  e8:	b2db      	uxtb	r3, r3
+  ea:	2b00      	cmp	r3, #0
+  ec:	d024      	beq.n	138 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x88>
+	{
+		USB->ISTR &= ~USB_ISTR_RESET;
+  ee:	4a36      	ldr	r2, [pc, #216]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+  f0:	4935      	ldr	r1, [pc, #212]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+  f2:	2344      	movs	r3, #68	; 0x44
+  f4:	5acb      	ldrh	r3, [r1, r3]
+  f6:	b29b      	uxth	r3, r3
+  f8:	4934      	ldr	r1, [pc, #208]	; (1cc <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x11c>)
+  fa:	400b      	ands	r3, r1
+  fc:	b299      	uxth	r1, r3
+  fe:	2344      	movs	r3, #68	; 0x44
+ 100:	52d1      	strh	r1, [r2, r3]
+
+		USB->DADDR = USB_DADDR_EF;
+ 102:	4a31      	ldr	r2, [pc, #196]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 104:	234c      	movs	r3, #76	; 0x4c
+ 106:	2180      	movs	r1, #128	; 0x80
+ 108:	52d1      	strh	r1, [r2, r3]
+
+		endpoints[0].openForTx(EndpointType::Control, 64);
+ 10a:	2380      	movs	r3, #128	; 0x80
+ 10c:	0099      	lsls	r1, r3, #2
+ 10e:	4b30      	ldr	r3, [pc, #192]	; (1d0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x120>)
+ 110:	2240      	movs	r2, #64	; 0x40
+ 112:	0018      	movs	r0, r3
+ 114:	f7ff fffe 	bl	0 <_ZNK6USBLib8Endpoint9openForTxENS_12EndpointTypeEt>
+		endpoints[0].openForRx(EndpointType::Control, 64);
+ 118:	2380      	movs	r3, #128	; 0x80
+ 11a:	0099      	lsls	r1, r3, #2
+ 11c:	4b2c      	ldr	r3, [pc, #176]	; (1d0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x120>)
+ 11e:	2240      	movs	r2, #64	; 0x40
+ 120:	0018      	movs	r0, r3
+ 122:	f7ff fffe 	bl	0 <_ZNK6USBLib8Endpoint9openForRxENS_12EndpointTypeEt>
+
+		_deviceDriver->busReset();
+ 126:	687b      	ldr	r3, [r7, #4]
+ 128:	685b      	ldr	r3, [r3, #4]
+ 12a:	681b      	ldr	r3, [r3, #0]
+ 12c:	3308      	adds	r3, #8
+ 12e:	681a      	ldr	r2, [r3, #0]
+ 130:	687b      	ldr	r3, [r7, #4]
+ 132:	685b      	ldr	r3, [r3, #4]
+ 134:	0018      	movs	r0, r3
+ 136:	4790      	blx	r2
+	}
+
+	// packet memory over/underflow
+
+	if ((USB->ISTR & USB_ISTR_PMAOVR) != 0)
+ 138:	4a23      	ldr	r2, [pc, #140]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 13a:	2344      	movs	r3, #68	; 0x44
+ 13c:	5ad3      	ldrh	r3, [r2, r3]
+ 13e:	b29b      	uxth	r3, r3
+ 140:	001a      	movs	r2, r3
+ 142:	2380      	movs	r3, #128	; 0x80
+ 144:	01db      	lsls	r3, r3, #7
+ 146:	4013      	ands	r3, r2
+ 148:	1e5a      	subs	r2, r3, #1
+ 14a:	4193      	sbcs	r3, r2
+ 14c:	b2db      	uxtb	r3, r3
+ 14e:	2b00      	cmp	r3, #0
+ 150:	d036      	beq.n	1c0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x110>
+		//onPacketMemoryOverUnderFlow();
+
+		// generic error
+
+		if ((USB->ISTR & USB_ISTR_ERR) != 0)
+ 152:	4a1d      	ldr	r2, [pc, #116]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 154:	2344      	movs	r3, #68	; 0x44
+ 156:	5ad3      	ldrh	r3, [r2, r3]
+ 158:	b29b      	uxth	r3, r3
+ 15a:	001a      	movs	r2, r3
+ 15c:	2380      	movs	r3, #128	; 0x80
+ 15e:	019b      	lsls	r3, r3, #6
+ 160:	4013      	ands	r3, r2
+ 162:	1e5a      	subs	r2, r3, #1
+ 164:	4193      	sbcs	r3, r2
+ 166:	b2db      	uxtb	r3, r3
+ 168:	2b00      	cmp	r3, #0
+ 16a:	d029      	beq.n	1c0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x110>
+			//onError();
+
+			// wakeup
+
+			if ((USB->ISTR & USB_ISTR_WKUP) != 0)
+ 16c:	4a16      	ldr	r2, [pc, #88]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 16e:	2344      	movs	r3, #68	; 0x44
+ 170:	5ad3      	ldrh	r3, [r2, r3]
+ 172:	b29b      	uxth	r3, r3
+ 174:	001a      	movs	r2, r3
+ 176:	2380      	movs	r3, #128	; 0x80
+ 178:	015b      	lsls	r3, r3, #5
+ 17a:	4013      	ands	r3, r2
+ 17c:	1e5a      	subs	r2, r3, #1
+ 17e:	4193      	sbcs	r3, r2
+ 180:	b2db      	uxtb	r3, r3
+ 182:	2b00      	cmp	r3, #0
+ 184:	d01c      	beq.n	1c0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x110>
+				//onWakeup();
+
+				// suspend
+
+				if ((USB->ISTR & USB_ISTR_SUSP) != 0)
+ 186:	4a10      	ldr	r2, [pc, #64]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 188:	2344      	movs	r3, #68	; 0x44
+ 18a:	5ad3      	ldrh	r3, [r2, r3]
+ 18c:	b29b      	uxth	r3, r3
+ 18e:	001a      	movs	r2, r3
+ 190:	2380      	movs	r3, #128	; 0x80
+ 192:	011b      	lsls	r3, r3, #4
+ 194:	4013      	ands	r3, r2
+ 196:	1e5a      	subs	r2, r3, #1
+ 198:	4193      	sbcs	r3, r2
+ 19a:	b2db      	uxtb	r3, r3
+ 19c:	2b00      	cmp	r3, #0
+ 19e:	d00f      	beq.n	1c0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x110>
+					//onSuspend();
+
+					// start of frame
+
+					if ((USB->ISTR & USB_ISTR_SOF) != 0)
+ 1a0:	4a09      	ldr	r2, [pc, #36]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 1a2:	2344      	movs	r3, #68	; 0x44
+ 1a4:	5ad3      	ldrh	r3, [r2, r3]
+ 1a6:	b29b      	uxth	r3, r3
+ 1a8:	001a      	movs	r2, r3
+ 1aa:	2380      	movs	r3, #128	; 0x80
+ 1ac:	009b      	lsls	r3, r3, #2
+ 1ae:	4013      	ands	r3, r2
+ 1b0:	1e5a      	subs	r2, r3, #1
+ 1b2:	4193      	sbcs	r3, r2
+ 1b4:	b2db      	uxtb	r3, r3
+ 1b6:	2b00      	cmp	r3, #0
+ 1b8:	d002      	beq.n	1c0 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x110>
+						//onStartOfFrame();
+
+						// expected start of frame
+
+						if ((USB->ISTR & USB_ISTR_ESOF) != 0)
+ 1ba:	4a03      	ldr	r2, [pc, #12]	; (1c8 <_ZN6USBLib19USBLowLevel_STM32F07_usbISREv+0x118>)
+ 1bc:	2344      	movs	r3, #68	; 0x44
+ 1be:	5ad3      	ldrh	r3, [r2, r3]
+							;
+	//onExpectedStartOfFrame();
+}
+ 1c0:	46c0      	nop			; (mov r8, r8)
+ 1c2:	46bd      	mov	sp, r7
+ 1c4:	b002      	add	sp, #8
+ 1c6:	bd80      	pop	{r7, pc}
+ 1c8:	40005c00 	.word	0x40005c00
+ 1cc:	fffffbff 	.word	0xfffffbff
+ 1d0:	00000000 	.word	0x00000000
+
+000001d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv>:
+
+void USBLowLevel_STM32F0::onCorrectTransfer()
+{
+ 1d4:	b580      	push	{r7, lr}
+ 1d6:	b084      	sub	sp, #16
+ 1d8:	af00      	add	r7, sp, #0
+ 1da:	6078      	str	r0, [r7, #4]
+	volatile uint16_t *reg;
+
+	// USB_ISTR_CTR is read only and will be automatically cleared by hardware
+	// when we've processed all endpoint results
+
+	while (((irq = USB->ISTR) & USB_ISTR_CTR) != 0)
+ 1dc:	493d      	ldr	r1, [pc, #244]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 1de:	230e      	movs	r3, #14
+ 1e0:	18fb      	adds	r3, r7, r3
+ 1e2:	2244      	movs	r2, #68	; 0x44
+ 1e4:	5a8a      	ldrh	r2, [r1, r2]
+ 1e6:	801a      	strh	r2, [r3, #0]
+ 1e8:	230e      	movs	r3, #14
+ 1ea:	18fb      	adds	r3, r7, r3
+ 1ec:	2200      	movs	r2, #0
+ 1ee:	5e9b      	ldrsh	r3, [r3, r2]
+ 1f0:	b29b      	uxth	r3, r3
+ 1f2:	0bdb      	lsrs	r3, r3, #15
+ 1f4:	b2db      	uxtb	r3, r3
+ 1f6:	2b00      	cmp	r3, #0
+ 1f8:	d067      	beq.n	2ca <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0xf6>
+	{
+		endpointIndex = irq & USB_ISTR_EP_ID;
+ 1fa:	230e      	movs	r3, #14
+ 1fc:	18fb      	adds	r3, r7, r3
+ 1fe:	881b      	ldrh	r3, [r3, #0]
+ 200:	b2da      	uxtb	r2, r3
+ 202:	230d      	movs	r3, #13
+ 204:	18fb      	adds	r3, r7, r3
+ 206:	210f      	movs	r1, #15
+ 208:	400a      	ands	r2, r1
+ 20a:	701a      	strb	r2, [r3, #0]
+		isOut = (irq & USB_ISTR_DIR) != 0;
+ 20c:	230e      	movs	r3, #14
+ 20e:	18fb      	adds	r3, r7, r3
+ 210:	881b      	ldrh	r3, [r3, #0]
+ 212:	2210      	movs	r2, #16
+ 214:	401a      	ands	r2, r3
+ 216:	230c      	movs	r3, #12
+ 218:	18fb      	adds	r3, r7, r3
+ 21a:	1e51      	subs	r1, r2, #1
+ 21c:	418a      	sbcs	r2, r1
+ 21e:	701a      	strb	r2, [r3, #0]
+
+		if (endpointIndex == 0)
+ 220:	230d      	movs	r3, #13
+ 222:	18fb      	adds	r3, r7, r3
+ 224:	781b      	ldrb	r3, [r3, #0]
+ 226:	2b00      	cmp	r3, #0
+ 228:	d1d8      	bne.n	1dc <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x8>
+		{
+			// control endpoint events
+			if (isOut)
+ 22a:	230c      	movs	r3, #12
+ 22c:	18fb      	adds	r3, r7, r3
+ 22e:	781b      	ldrb	r3, [r3, #0]
+ 230:	2b00      	cmp	r3, #0
+ 232:	d038      	beq.n	2a6 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0xd2>
+			{
+				if ((USB->EP0R & USB_EP_SETUP) != 0)
+ 234:	4b27      	ldr	r3, [pc, #156]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 236:	881b      	ldrh	r3, [r3, #0]
+ 238:	b29b      	uxth	r3, r3
+ 23a:	001a      	movs	r2, r3
+ 23c:	2380      	movs	r3, #128	; 0x80
+ 23e:	011b      	lsls	r3, r3, #4
+ 240:	4013      	ands	r3, r2
+ 242:	1e5a      	subs	r2, r3, #1
+ 244:	4193      	sbcs	r3, r2
+ 246:	b2db      	uxtb	r3, r3
+ 248:	2b00      	cmp	r3, #0
+ 24a:	d011      	beq.n	270 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x9c>
+				{
+					USB->EP0R = USB->EP0R & ~(USB_EP_CTR_RX) & USB_EPREG_MASK;
+ 24c:	4a21      	ldr	r2, [pc, #132]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 24e:	4b21      	ldr	r3, [pc, #132]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 250:	881b      	ldrh	r3, [r3, #0]
+ 252:	b29b      	uxth	r3, r3
+ 254:	4920      	ldr	r1, [pc, #128]	; (2d8 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x104>)
+ 256:	400b      	ands	r3, r1
+ 258:	b29b      	uxth	r3, r3
+ 25a:	8013      	strh	r3, [r2, #0]
+					_deviceDriver->EP0setupCallback();
+ 25c:	687b      	ldr	r3, [r7, #4]
+ 25e:	685b      	ldr	r3, [r3, #4]
+ 260:	681b      	ldr	r3, [r3, #0]
+ 262:	330c      	adds	r3, #12
+ 264:	681a      	ldr	r2, [r3, #0]
+ 266:	687b      	ldr	r3, [r7, #4]
+ 268:	685b      	ldr	r3, [r3, #4]
+ 26a:	0018      	movs	r0, r3
+ 26c:	4790      	blx	r2
+ 26e:	e7b5      	b.n	1dc <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x8>
+				}
+				else if ((USB->EP0R & USB_EP_CTR_RX) != 0)
+ 270:	4b18      	ldr	r3, [pc, #96]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 272:	881b      	ldrh	r3, [r3, #0]
+ 274:	b29b      	uxth	r3, r3
+ 276:	b21b      	sxth	r3, r3
+ 278:	b29b      	uxth	r3, r3
+ 27a:	0bdb      	lsrs	r3, r3, #15
+ 27c:	b2db      	uxtb	r3, r3
+ 27e:	2b00      	cmp	r3, #0
+ 280:	d0ac      	beq.n	1dc <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x8>
+				{
+					USB->EP0R = USB->EP0R & ~(USB_EP_CTR_RX) & USB_EPREG_MASK;
+ 282:	4a14      	ldr	r2, [pc, #80]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 284:	4b13      	ldr	r3, [pc, #76]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 286:	881b      	ldrh	r3, [r3, #0]
+ 288:	b29b      	uxth	r3, r3
+ 28a:	4913      	ldr	r1, [pc, #76]	; (2d8 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x104>)
+ 28c:	400b      	ands	r3, r1
+ 28e:	b29b      	uxth	r3, r3
+ 290:	8013      	strh	r3, [r2, #0]
+					_deviceDriver->EP0out();
+ 292:	687b      	ldr	r3, [r7, #4]
+ 294:	685b      	ldr	r3, [r3, #4]
+ 296:	681b      	ldr	r3, [r3, #0]
+ 298:	3310      	adds	r3, #16
+ 29a:	681a      	ldr	r2, [r3, #0]
+ 29c:	687b      	ldr	r3, [r7, #4]
+ 29e:	685b      	ldr	r3, [r3, #4]
+ 2a0:	0018      	movs	r0, r3
+ 2a2:	4790      	blx	r2
+ 2a4:	e79a      	b.n	1dc <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x8>
+				}
+
+			}
+			else
+			{
+				USB->EP0R = USB->EP0R & (~USB_EP_CTR_TX) & USB_EPREG_MASK;
+ 2a6:	4a0b      	ldr	r2, [pc, #44]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 2a8:	4b0a      	ldr	r3, [pc, #40]	; (2d4 <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x100>)
+ 2aa:	881b      	ldrh	r3, [r3, #0]
+ 2ac:	b29b      	uxth	r3, r3
+ 2ae:	490b      	ldr	r1, [pc, #44]	; (2dc <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x108>)
+ 2b0:	400b      	ands	r3, r1
+ 2b2:	b29b      	uxth	r3, r3
+ 2b4:	8013      	strh	r3, [r2, #0]
+				_deviceDriver->EP0in();
+ 2b6:	687b      	ldr	r3, [r7, #4]
+ 2b8:	685b      	ldr	r3, [r3, #4]
+ 2ba:	681b      	ldr	r3, [r3, #0]
+ 2bc:	3314      	adds	r3, #20
+ 2be:	681a      	ldr	r2, [r3, #0]
+ 2c0:	687b      	ldr	r3, [r7, #4]
+ 2c2:	685b      	ldr	r3, [r3, #4]
+ 2c4:	0018      	movs	r0, r3
+ 2c6:	4790      	blx	r2
+	while (((irq = USB->ISTR) & USB_ISTR_CTR) != 0)
+ 2c8:	e788      	b.n	1dc <_ZN6USBLib19USBLowLevel_STM32F017onCorrectTransferEv+0x8>
+//
+//			if ((*reg & USB_EP_CTR_TX) != 0)
+//				handleEndpointInTransfer(reg, endpointIndex);
+		}
+	}
+}
+ 2ca:	46c0      	nop			; (mov r8, r8)
+ 2cc:	46bd      	mov	sp, r7
+ 2ce:	b004      	add	sp, #16
+ 2d0:	bd80      	pop	{r7, pc}
+ 2d2:	46c0      	nop			; (mov r8, r8)
+ 2d4:	40005c00 	.word	0x40005c00
+ 2d8:	00000f8f 	.word	0x00000f8f
+ 2dc:	ffff8f0f 	.word	0xffff8f0f
+
+000002e0 <_ZN6USBLib19USBLowLevel_STM32F07connectEv>:
+
+bool USBLowLevel_STM32F0::connect()
+{
+ 2e0:	b580      	push	{r7, lr}
+ 2e2:	b082      	sub	sp, #8
+ 2e4:	af00      	add	r7, sp, #0
+ 2e6:	6078      	str	r0, [r7, #4]
+	//setDeviceState(DeviceStateType::DEFAULT);
+	//_remoteWakeup = false;
+
+	// the buffer description table is at address 0 in the packet memory
+
+	USB->BTABLE = 0;
+ 2e8:	4a16      	ldr	r2, [pc, #88]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 2ea:	2350      	movs	r3, #80	; 0x50
+ 2ec:	2100      	movs	r1, #0
+ 2ee:	52d1      	strh	r1, [r2, r3]
+
+	//RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB,ENABLE);
+	RCC->APB1ENR |= RCC_APB1ENR_USBEN;
+ 2f0:	4b15      	ldr	r3, [pc, #84]	; (348 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x68>)
+ 2f2:	4a15      	ldr	r2, [pc, #84]	; (348 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x68>)
+ 2f4:	69d2      	ldr	r2, [r2, #28]
+ 2f6:	2180      	movs	r1, #128	; 0x80
+ 2f8:	0409      	lsls	r1, r1, #16
+ 2fa:	430a      	orrs	r2, r1
+ 2fc:	61da      	str	r2, [r3, #28]
+
+	// Nvic::configureIrq(USB_IRQn);
+	NVIC_EnableIRQ(USB_IRQn);
+ 2fe:	201f      	movs	r0, #31
+ 300:	f7ff fe87 	bl	12 <NVIC_EnableIRQ>
+
+	// reset the peripheral and any pending interrupts
+
+	//reset();
+	USB->CNTR = USB_CNTR_FRES;
+ 304:	4a0f      	ldr	r2, [pc, #60]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 306:	2340      	movs	r3, #64	; 0x40
+ 308:	2101      	movs	r1, #1
+ 30a:	52d1      	strh	r1, [r2, r3]
+	USB->CNTR = 0;
+ 30c:	4a0d      	ldr	r2, [pc, #52]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 30e:	2340      	movs	r3, #64	; 0x40
+ 310:	2100      	movs	r1, #0
+ 312:	52d1      	strh	r1, [r2, r3]
+	//clearInterrupts();
+	USB->ISTR = 0;
+ 314:	4a0b      	ldr	r2, [pc, #44]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 316:	2344      	movs	r3, #68	; 0x44
+ 318:	2100      	movs	r1, #0
+ 31a:	52d1      	strh	r1, [r2, r3]
+	// set the interrupt mask
+
+	USB->CNTR = USB_CNTR_CTRM          // correct transfer
+ 31c:	4a09      	ldr	r2, [pc, #36]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 31e:	2340      	movs	r3, #64	; 0x40
+ 320:	490a      	ldr	r1, [pc, #40]	; (34c <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x6c>)
+ 322:	52d1      	strh	r1, [r2, r3]
+	//		| USB_CNTR_SUSPM        // suspend
+	//		| USB_CNTR_ERRM         // error
+	//		| USB_CNTR_ESOFM        // expected start of frame
+			| USB_CNTR_RESETM;      // reset
+
+	USB->BCDR |= USB_BCDR_DPPU;
+ 324:	4a07      	ldr	r2, [pc, #28]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 326:	4907      	ldr	r1, [pc, #28]	; (344 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x64>)
+ 328:	2358      	movs	r3, #88	; 0x58
+ 32a:	5acb      	ldrh	r3, [r1, r3]
+ 32c:	b29b      	uxth	r3, r3
+ 32e:	4908      	ldr	r1, [pc, #32]	; (350 <_ZN6USBLib19USBLowLevel_STM32F07connectEv+0x70>)
+ 330:	430b      	orrs	r3, r1
+ 332:	b299      	uxth	r1, r3
+ 334:	2358      	movs	r3, #88	; 0x58
+ 336:	52d1      	strh	r1, [r2, r3]
+
+	// notify
+
+	//UsbStatus(UsbStatusType::STATE_DEFAULT);
+}
+ 338:	46c0      	nop			; (mov r8, r8)
+ 33a:	0018      	movs	r0, r3
+ 33c:	46bd      	mov	sp, r7
+ 33e:	b002      	add	sp, #8
+ 340:	bd80      	pop	{r7, pc}
+ 342:	46c0      	nop			; (mov r8, r8)
+ 344:	40005c00 	.word	0x40005c00
+ 348:	40021000 	.word	0x40021000
+ 34c:	ffff8400 	.word	0xffff8400
+ 350:	ffff8000 	.word	0xffff8000
+
+00000354 <_ZN6USBLib19USBLowLevel_STM32F010disconnectEv>:
+
+bool USBLowLevel_STM32F0::disconnect()
+{
+ 354:	b580      	push	{r7, lr}
+ 356:	b082      	sub	sp, #8
+ 358:	af00      	add	r7, sp, #0
+ 35a:	6078      	str	r0, [r7, #4]
+	return false;
+ 35c:	2300      	movs	r3, #0
+}
+ 35e:	0018      	movs	r0, r3
+ 360:	46bd      	mov	sp, r7
+ 362:	b002      	add	sp, #8
+ 364:	bd80      	pop	{r7, pc}
+
+00000366 <_ZN6USBLib19USBLowLevel_STM32F015readSetupHeaderEPh>:
+
+bool USBLowLevel_STM32F0::readSetupHeader(uint8_t* buffer)
+{
+ 366:	b580      	push	{r7, lr}
+ 368:	b082      	sub	sp, #8
+ 36a:	af00      	add	r7, sp, #0
+ 36c:	6078      	str	r0, [r7, #4]
+ 36e:	6039      	str	r1, [r7, #0]
+	endpoints[0].readData(buffer, 64);
+ 370:	6839      	ldr	r1, [r7, #0]
+ 372:	4b05      	ldr	r3, [pc, #20]	; (388 <_ZN6USBLib19USBLowLevel_STM32F015readSetupHeaderEPh+0x22>)
+ 374:	2240      	movs	r2, #64	; 0x40
+ 376:	0018      	movs	r0, r3
+ 378:	f7ff fffe 	bl	0 <_ZNK6USBLib8Endpoint8readDataEPht>
+}
+ 37c:	46c0      	nop			; (mov r8, r8)
+ 37e:	0018      	movs	r0, r3
+ 380:	46bd      	mov	sp, r7
+ 382:	b002      	add	sp, #8
+ 384:	bd80      	pop	{r7, pc}
+ 386:	46c0      	nop			; (mov r8, r8)
+ 388:	00000000 	.word	0x00000000
+
+0000038c <_ZN6USBLib19USBLowLevel_STM32F013writeEndpointEhPKht>:
+
+bool USBLowLevel_STM32F0::writeEndpoint(uint8_t number, const uint8_t* data,
+		uint16_t len)
+{
+ 38c:	b580      	push	{r7, lr}
+ 38e:	b084      	sub	sp, #16
+ 390:	af00      	add	r7, sp, #0
+ 392:	60f8      	str	r0, [r7, #12]
+ 394:	0008      	movs	r0, r1
+ 396:	607a      	str	r2, [r7, #4]
+ 398:	0019      	movs	r1, r3
+ 39a:	230b      	movs	r3, #11
+ 39c:	18fb      	adds	r3, r7, r3
+ 39e:	1c02      	adds	r2, r0, #0
+ 3a0:	701a      	strb	r2, [r3, #0]
+ 3a2:	2308      	movs	r3, #8
+ 3a4:	18fb      	adds	r3, r7, r3
+ 3a6:	1c0a      	adds	r2, r1, #0
+ 3a8:	801a      	strh	r2, [r3, #0]
+	endpoints[number].write(data, len);
+ 3aa:	230b      	movs	r3, #11
+ 3ac:	18fb      	adds	r3, r7, r3
+ 3ae:	781b      	ldrb	r3, [r3, #0]
+ 3b0:	00da      	lsls	r2, r3, #3
+ 3b2:	4b07      	ldr	r3, [pc, #28]	; (3d0 <_ZN6USBLib19USBLowLevel_STM32F013writeEndpointEhPKht+0x44>)
+ 3b4:	18d0      	adds	r0, r2, r3
+ 3b6:	2308      	movs	r3, #8
+ 3b8:	18fb      	adds	r3, r7, r3
+ 3ba:	881a      	ldrh	r2, [r3, #0]
+ 3bc:	687b      	ldr	r3, [r7, #4]
+ 3be:	0019      	movs	r1, r3
+ 3c0:	f7ff fffe 	bl	0 <_ZNK6USBLib8Endpoint5writeEPKht>
+}
+ 3c4:	46c0      	nop			; (mov r8, r8)
+ 3c6:	0018      	movs	r0, r3
+ 3c8:	46bd      	mov	sp, r7
+ 3ca:	b004      	add	sp, #16
+ 3cc:	bd80      	pop	{r7, pc}
+ 3ce:	46c0      	nop			; (mov r8, r8)
+ 3d0:	00000000 	.word	0x00000000
+
+000003d4 <_ZN6USBLib19USBLowLevel_STM32F016readEndpointDataEhPh>:
+
+uint16_t USBLowLevel_STM32F0::readEndpointData(uint8_t number, uint8_t* buffer)
+{
+ 3d4:	b580      	push	{r7, lr}
+ 3d6:	b084      	sub	sp, #16
+ 3d8:	af00      	add	r7, sp, #0
+ 3da:	60f8      	str	r0, [r7, #12]
+ 3dc:	607a      	str	r2, [r7, #4]
+ 3de:	230b      	movs	r3, #11
+ 3e0:	18fb      	adds	r3, r7, r3
+ 3e2:	1c0a      	adds	r2, r1, #0
+ 3e4:	701a      	strb	r2, [r3, #0]
+	return endpoints[number].readData(buffer, 64);
+ 3e6:	230b      	movs	r3, #11
+ 3e8:	18fb      	adds	r3, r7, r3
+ 3ea:	781b      	ldrb	r3, [r3, #0]
+ 3ec:	00da      	lsls	r2, r3, #3
+ 3ee:	4b06      	ldr	r3, [pc, #24]	; (408 <_ZN6USBLib19USBLowLevel_STM32F016readEndpointDataEhPh+0x34>)
+ 3f0:	18d3      	adds	r3, r2, r3
+ 3f2:	6879      	ldr	r1, [r7, #4]
+ 3f4:	2240      	movs	r2, #64	; 0x40
+ 3f6:	0018      	movs	r0, r3
+ 3f8:	f7ff fffe 	bl	0 <_ZNK6USBLib8Endpoint8readDataEPht>
+ 3fc:	0003      	movs	r3, r0
+}
+ 3fe:	0018      	movs	r0, r3
+ 400:	46bd      	mov	sp, r7
+ 402:	b004      	add	sp, #16
+ 404:	bd80      	pop	{r7, pc}
+ 406:	46c0      	nop			; (mov r8, r8)
+ 408:	00000000 	.word	0x00000000
+
+0000040c <_ZN6USBLib19USBLowLevel_STM32F012readEndpointEh>:
+
+void USBLowLevel_STM32F0::readEndpoint(uint8_t number)
+{
+ 40c:	b580      	push	{r7, lr}
+ 40e:	b082      	sub	sp, #8
+ 410:	af00      	add	r7, sp, #0
+ 412:	6078      	str	r0, [r7, #4]
+ 414:	000a      	movs	r2, r1
+ 416:	1cfb      	adds	r3, r7, #3
+ 418:	701a      	strb	r2, [r3, #0]
+	endpoints[number].read();
+ 41a:	1cfb      	adds	r3, r7, #3
+ 41c:	781b      	ldrb	r3, [r3, #0]
+ 41e:	00da      	lsls	r2, r3, #3
+ 420:	4b04      	ldr	r3, [pc, #16]	; (434 <_ZN6USBLib19USBLowLevel_STM32F012readEndpointEh+0x28>)
+ 422:	18d3      	adds	r3, r2, r3
+ 424:	0018      	movs	r0, r3
+ 426:	f7ff fffe 	bl	0 <_ZNK6USBLib8Endpoint4readEv>
+}
+ 42a:	46c0      	nop			; (mov r8, r8)
+ 42c:	46bd      	mov	sp, r7
+ 42e:	b002      	add	sp, #8
+ 430:	bd80      	pop	{r7, pc}
+ 432:	46c0      	nop			; (mov r8, r8)
+ 434:	00000000 	.word	0x00000000
+
+00000438 <_ZN6USBLib19USBLowLevel_STM32F010setAddressEh>:
+
+bool USBLowLevel_STM32F0::setAddress(uint8_t address)
+{
+ 438:	b580      	push	{r7, lr}
+ 43a:	b082      	sub	sp, #8
+ 43c:	af00      	add	r7, sp, #0
+ 43e:	6078      	str	r0, [r7, #4]
+ 440:	000a      	movs	r2, r1
+ 442:	1cfb      	adds	r3, r7, #3
+ 444:	701a      	strb	r2, [r3, #0]
+	USB->DADDR = address | USB_DADDR_EF;
+ 446:	4907      	ldr	r1, [pc, #28]	; (464 <_ZN6USBLib19USBLowLevel_STM32F010setAddressEh+0x2c>)
+ 448:	1cfb      	adds	r3, r7, #3
+ 44a:	781b      	ldrb	r3, [r3, #0]
+ 44c:	2280      	movs	r2, #128	; 0x80
+ 44e:	4252      	negs	r2, r2
+ 450:	4313      	orrs	r3, r2
+ 452:	b2db      	uxtb	r3, r3
+ 454:	b29a      	uxth	r2, r3
+ 456:	234c      	movs	r3, #76	; 0x4c
+ 458:	52ca      	strh	r2, [r1, r3]
+	return true;
+ 45a:	2301      	movs	r3, #1
+}
+ 45c:	0018      	movs	r0, r3
+ 45e:	46bd      	mov	sp, r7
+ 460:	b002      	add	sp, #8
+ 462:	bd80      	pop	{r7, pc}
+ 464:	40005c00 	.word	0x40005c00
+
+Disassembly of section .text._ZN6USBLib11USBLowLevelC2Ev:
+
+00000000 <_ZN6USBLib11USBLowLevelC1Ev>:
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	4a03      	ldr	r2, [pc, #12]	; (18 <_ZN6USBLib11USBLowLevelC1Ev+0x18>)
+}
+   a:	687b      	ldr	r3, [r7, #4]
+   c:	601a      	str	r2, [r3, #0]
+   e:	687b      	ldr	r3, [r7, #4]
+  10:	0018      	movs	r0, r3
+{
+  12:	46bd      	mov	sp, r7
+  14:	b002      	add	sp, #8
+  16:	bd80      	pop	{r7, pc}
+  18:	00000008 	.word	0x00000008
+
+Disassembly of section .text._ZN6USBLib11USBLowLevelD2Ev:
+
+00000000 <_ZN6USBLib11USBLowLevelD1Ev>:
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	4a03      	ldr	r2, [pc, #12]	; (18 <_ZN6USBLib11USBLowLevelD1Ev+0x18>)
+}
+   a:	687b      	ldr	r3, [r7, #4]
+   c:	601a      	str	r2, [r3, #0]
+   e:	687b      	ldr	r3, [r7, #4]
+  10:	0018      	movs	r0, r3
+  12:	46bd      	mov	sp, r7
+  14:	b002      	add	sp, #8
+  16:	bd80      	pop	{r7, pc}
+  18:	00000008 	.word	0x00000008
+
+Disassembly of section .text._ZN6USBLib11USBLowLevelD0Ev:
+
+00000000 <_ZN6USBLib11USBLowLevelD0Ev>:
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	687b      	ldr	r3, [r7, #4]
+}
+   a:	0018      	movs	r0, r3
+   c:	f7ff fffe 	bl	0 <_ZN6USBLib11USBLowLevelD0Ev>
+  10:	687b      	ldr	r3, [r7, #4]
+  12:	2108      	movs	r1, #8
+  14:	0018      	movs	r0, r3
+  16:	f7ff fffe 	bl	0 <_ZdlPvj>
+  1a:	687b      	ldr	r3, [r7, #4]
+  1c:	0018      	movs	r0, r3
+  NVIC->ISER[0] = (1 << ((uint32_t)(IRQn) & 0x1F));
+  1e:	46bd      	mov	sp, r7
+  20:	b002      	add	sp, #8
+  22:	bd80      	pop	{r7, pc}
+
+Disassembly of section .text._ZN6USBLib11USBLowLevel7_usbISREv:
+
+00000000 <_ZN6USBLib11USBLowLevel7_usbISREv>:
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	46c0      	nop			; (mov r8, r8)
+}
+   a:	46bd      	mov	sp, r7
+   c:	b002      	add	sp, #8
+   e:	bd80      	pop	{r7, pc}
+
+USBDevice.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <_ZL20__gthread_key_deletei>:
+  return 0;
+}
+
+static int _GLIBCXX_UNUSED
+__gthread_key_delete (__gthread_key_t __key _GLIBCXX_UNUSED)
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	2300      	movs	r3, #0
+}
+   a:	0018      	movs	r0, r3
+   c:	46bd      	mov	sp, r7
+   e:	b002      	add	sp, #8
+  10:	bd80      	pop	{r7, pc}
+
+00000012 <_ZN6USBLib9USBDeviceD1Ev>:
+				0x03,                        // bmAttributes: Interrupt endpoint
+				10, 0, // wMaxPacketSize: 2 Bytes max
+				0x01,                    // bInterval: Polling Interval (20 ms)
+		};
+
+USBDevice::~USBDevice()
+  12:	b580      	push	{r7, lr}
+  14:	b082      	sub	sp, #8
+  16:	af00      	add	r7, sp, #0
+  18:	6078      	str	r0, [r7, #4]
+  1a:	4a04      	ldr	r2, [pc, #16]	; (2c <_ZN6USBLib9USBDeviceD1Ev+0x1a>)
+  1c:	687b      	ldr	r3, [r7, #4]
+  1e:	601a      	str	r2, [r3, #0]
+{
+	// TODO Auto-generated destructor stub
+}
+  20:	687b      	ldr	r3, [r7, #4]
+  22:	0018      	movs	r0, r3
+  24:	46bd      	mov	sp, r7
+  26:	b002      	add	sp, #8
+  28:	bd80      	pop	{r7, pc}
+  2a:	46c0      	nop			; (mov r8, r8)
+  2c:	00000008 	.word	0x00000008
+
+00000030 <_ZN6USBLib9USBDeviceD0Ev>:
+USBDevice::~USBDevice()
+  30:	b580      	push	{r7, lr}
+  32:	b082      	sub	sp, #8
+  34:	af00      	add	r7, sp, #0
+  36:	6078      	str	r0, [r7, #4]
+}
+  38:	687b      	ldr	r3, [r7, #4]
+  3a:	0018      	movs	r0, r3
+  3c:	f7ff fffe 	bl	12 <_ZN6USBLib9USBDeviceD1Ev>
+  40:	687b      	ldr	r3, [r7, #4]
+  42:	2124      	movs	r1, #36	; 0x24
+  44:	0018      	movs	r0, r3
+  46:	f7ff fffe 	bl	0 <_ZdlPvj>
+  4a:	687b      	ldr	r3, [r7, #4]
+  4c:	0018      	movs	r0, r3
+  4e:	46bd      	mov	sp, r7
+  50:	b002      	add	sp, #8
+  52:	bd80      	pop	{r7, pc}
+
+00000054 <_ZN6USBLib9USBDevice19getDeviceDescriptorEv>:
+
+const uint8_t* const USBDevice::getDeviceDescriptor()
+{
+  54:	b580      	push	{r7, lr}
+  56:	b084      	sub	sp, #16
+  58:	af00      	add	r7, sp, #0
+  5a:	6078      	str	r0, [r7, #4]
+	return _config->getDeviceDescriptor().first;
+  5c:	687b      	ldr	r3, [r7, #4]
+  5e:	685b      	ldr	r3, [r3, #4]
+  60:	681b      	ldr	r3, [r3, #0]
+  62:	681a      	ldr	r2, [r3, #0]
+  64:	687b      	ldr	r3, [r7, #4]
+  66:	6859      	ldr	r1, [r3, #4]
+  68:	2308      	movs	r3, #8
+  6a:	18fb      	adds	r3, r7, r3
+  6c:	0018      	movs	r0, r3
+  6e:	4790      	blx	r2
+  70:	2308      	movs	r3, #8
+  72:	18fb      	adds	r3, r7, r3
+  74:	681b      	ldr	r3, [r3, #0]
+}
+  76:	0018      	movs	r0, r3
+  78:	46bd      	mov	sp, r7
+  7a:	b004      	add	sp, #16
+  7c:	bd80      	pop	{r7, pc}
+
+0000007e <_ZN6USBLib9USBDevice8busResetEv>:
+
+void USBDevice::busReset(void)
+{
+  7e:	b580      	push	{r7, lr}
+  80:	b082      	sub	sp, #8
+  82:	af00      	add	r7, sp, #0
+  84:	6078      	str	r0, [r7, #4]
+	_address = 0;
+  86:	687b      	ldr	r3, [r7, #4]
+  88:	2220      	movs	r2, #32
+  8a:	2100      	movs	r1, #0
+  8c:	5499      	strb	r1, [r3, r2]
+}
+  8e:	46c0      	nop			; (mov r8, r8)
+  90:	46bd      	mov	sp, r7
+  92:	b002      	add	sp, #8
+  94:	bd80      	pop	{r7, pc}
+
+00000096 <_ZN6USBLib9USBDevice7connectEv>:
+
+void USBDevice::connect()
+{
+  96:	b580      	push	{r7, lr}
+  98:	b082      	sub	sp, #8
+  9a:	af00      	add	r7, sp, #0
+  9c:	6078      	str	r0, [r7, #4]
+	_lowLevelDriver.connect();
+  9e:	687b      	ldr	r3, [r7, #4]
+  a0:	689b      	ldr	r3, [r3, #8]
+  a2:	681b      	ldr	r3, [r3, #0]
+  a4:	681a      	ldr	r2, [r3, #0]
+  a6:	687b      	ldr	r3, [r7, #4]
+  a8:	689b      	ldr	r3, [r3, #8]
+  aa:	0018      	movs	r0, r3
+  ac:	4790      	blx	r2
+}
+  ae:	46c0      	nop			; (mov r8, r8)
+  b0:	46bd      	mov	sp, r7
+  b2:	b002      	add	sp, #8
+  b4:	bd80      	pop	{r7, pc}
+
+000000b6 <_ZN6USBLib9USBDevice10disconnectEv>:
+
+void USBDevice::disconnect()
+{
+  b6:	b580      	push	{r7, lr}
+  b8:	b082      	sub	sp, #8
+  ba:	af00      	add	r7, sp, #0
+  bc:	6078      	str	r0, [r7, #4]
+	_lowLevelDriver.disconnect();
+  be:	687b      	ldr	r3, [r7, #4]
+  c0:	689b      	ldr	r3, [r3, #8]
+  c2:	681b      	ldr	r3, [r3, #0]
+  c4:	3304      	adds	r3, #4
+  c6:	681a      	ldr	r2, [r3, #0]
+  c8:	687b      	ldr	r3, [r7, #4]
+  ca:	689b      	ldr	r3, [r3, #8]
+  cc:	0018      	movs	r0, r3
+  ce:	4790      	blx	r2
+}
+  d0:	46c0      	nop			; (mov r8, r8)
+  d2:	46bd      	mov	sp, r7
+  d4:	b002      	add	sp, #8
+  d6:	bd80      	pop	{r7, pc}
+
+000000d8 <_ZN6USBLib9USBDevice16EP0setupCallbackEv>:
+
+void USBDevice::EP0setupCallback(void)
+{
+  d8:	b590      	push	{r4, r7, lr}
+  da:	b089      	sub	sp, #36	; 0x24
+  dc:	af00      	add	r7, sp, #0
+  de:	6078      	str	r0, [r7, #4]
+	bool res;
+	uint8_t buffer[12];
+
+	_lowLevelDriver.readSetupHeader(buffer);
+  e0:	687b      	ldr	r3, [r7, #4]
+  e2:	689b      	ldr	r3, [r3, #8]
+  e4:	681b      	ldr	r3, [r3, #0]
+  e6:	330c      	adds	r3, #12
+  e8:	681a      	ldr	r2, [r3, #0]
+  ea:	687b      	ldr	r3, [r7, #4]
+  ec:	689b      	ldr	r3, [r3, #8]
+  ee:	2108      	movs	r1, #8
+  f0:	1879      	adds	r1, r7, r1
+  f2:	0018      	movs	r0, r3
+  f4:	4790      	blx	r2
+
+	_transfer.initialize(SetupPacket::deserialize(buffer));
+  f6:	687b      	ldr	r3, [r7, #4]
+  f8:	330c      	adds	r3, #12
+  fa:	001c      	movs	r4, r3
+  fc:	2314      	movs	r3, #20
+  fe:	18fb      	adds	r3, r7, r3
+ 100:	2208      	movs	r2, #8
+ 102:	18ba      	adds	r2, r7, r2
+ 104:	0011      	movs	r1, r2
+ 106:	0018      	movs	r0, r3
+ 108:	f7ff fffe 	bl	0 <_ZL20__gthread_key_deletei>
+ 10c:	2314      	movs	r3, #20
+ 10e:	18fb      	adds	r3, r7, r3
+ 110:	6819      	ldr	r1, [r3, #0]
+ 112:	685a      	ldr	r2, [r3, #4]
+ 114:	0020      	movs	r0, r4
+ 116:	f7ff fffe 	bl	0 <_ZL20__gthread_key_deletei>
+
+	if (_transfer.setupPacket.bmRequestType.type == Type::Standard)
+ 11a:	687b      	ldr	r3, [r7, #4]
+ 11c:	7b1b      	ldrb	r3, [r3, #12]
+ 11e:	2206      	movs	r2, #6
+ 120:	4013      	ands	r3, r2
+ 122:	b2db      	uxtb	r3, r3
+ 124:	2b00      	cmp	r3, #0
+ 126:	d108      	bne.n	13a <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0x62>
+	{
+		res = handleStandardRequest();
+ 128:	687b      	ldr	r3, [r7, #4]
+ 12a:	0018      	movs	r0, r3
+ 12c:	f7ff fffe 	bl	1b4 <_ZN6USBLib9USBDevice21handleStandardRequestEv>
+ 130:	0003      	movs	r3, r0
+ 132:	001a      	movs	r2, r3
+ 134:	231f      	movs	r3, #31
+ 136:	18fb      	adds	r3, r7, r3
+ 138:	701a      	strb	r2, [r3, #0]
+	{
+		//callback do wy¿szej warstwy device/class request
+	}
+
+	/* Data or status stage if applicable */
+	if (_transfer.setupPacket.wLength > 0)
+ 13a:	687b      	ldr	r3, [r7, #4]
+ 13c:	8a5b      	ldrh	r3, [r3, #18]
+ 13e:	2b00      	cmp	r3, #0
+ 140:	dd29      	ble.n	196 <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0xbe>
+	{
+		_transfer.stage = TransferStage::Data;
+ 142:	687b      	ldr	r3, [r7, #4]
+ 144:	2201      	movs	r2, #1
+ 146:	76da      	strb	r2, [r3, #27]
+
+		if (_transfer.setupPacket.bmRequestType.direction
+				== DataPhaseTransferDirection::DeviceToHost)
+ 148:	687b      	ldr	r3, [r7, #4]
+ 14a:	7b1b      	ldrb	r3, [r3, #12]
+ 14c:	2201      	movs	r2, #1
+ 14e:	4013      	ands	r3, r2
+ 150:	b2db      	uxtb	r3, r3
+		if (_transfer.setupPacket.bmRequestType.direction
+ 152:	2b00      	cmp	r3, #0
+ 154:	d014      	beq.n	180 <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0xa8>
+		{
+			/* Check if we'll need to send a zero length packet at */
+			/* the end of this transfer */
+			if (_transfer.setupPacket.wLength > _transfer.remaining) //??? <
+ 156:	687b      	ldr	r3, [r7, #4]
+ 158:	8a5b      	ldrh	r3, [r3, #18]
+ 15a:	001a      	movs	r2, r3
+ 15c:	687b      	ldr	r3, [r7, #4]
+ 15e:	8b1b      	ldrh	r3, [r3, #24]
+ 160:	429a      	cmp	r2, r3
+ 162:	dd08      	ble.n	176 <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0x9e>
+			{
+				/* Device wishes to transfer less than host requested */
+				if ((_transfer.remaining % 64) == 0)
+ 164:	687b      	ldr	r3, [r7, #4]
+ 166:	8b1b      	ldrh	r3, [r3, #24]
+ 168:	001a      	movs	r2, r3
+ 16a:	233f      	movs	r3, #63	; 0x3f
+ 16c:	4013      	ands	r3, r2
+ 16e:	d102      	bne.n	176 <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0x9e>
+				{
+					/* Transfer is a multiple of EP0 max packet size */
+					_transfer.isZeroLengthRequired = true;
+ 170:	687b      	ldr	r3, [r7, #4]
+ 172:	2201      	movs	r2, #1
+ 174:	771a      	strb	r2, [r3, #28]
+				}
+			}
+
+			/* IN stage */
+			handleControlDataInStage();
+ 176:	687b      	ldr	r3, [r7, #4]
+ 178:	0018      	movs	r0, r3
+ 17a:	f7ff fffe 	bl	38a <_ZN6USBLib9USBDevice24handleControlDataInStageEv>
+	{
+		/* Status stage */
+		_lowLevelDriver.writeEndpoint(0, nullptr, 0);
+	}
+
+}
+ 17e:	e015      	b.n	1ac <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0xd4>
+			_lowLevelDriver.readEndpoint(0);
+ 180:	687b      	ldr	r3, [r7, #4]
+ 182:	689b      	ldr	r3, [r3, #8]
+ 184:	681b      	ldr	r3, [r3, #0]
+ 186:	3318      	adds	r3, #24
+ 188:	681a      	ldr	r2, [r3, #0]
+ 18a:	687b      	ldr	r3, [r7, #4]
+ 18c:	689b      	ldr	r3, [r3, #8]
+ 18e:	2100      	movs	r1, #0
+ 190:	0018      	movs	r0, r3
+ 192:	4790      	blx	r2
+}
+ 194:	e00a      	b.n	1ac <_ZN6USBLib9USBDevice16EP0setupCallbackEv+0xd4>
+		_lowLevelDriver.writeEndpoint(0, nullptr, 0);
+ 196:	687b      	ldr	r3, [r7, #4]
+ 198:	689b      	ldr	r3, [r3, #8]
+ 19a:	681b      	ldr	r3, [r3, #0]
+ 19c:	3310      	adds	r3, #16
+ 19e:	681c      	ldr	r4, [r3, #0]
+ 1a0:	687b      	ldr	r3, [r7, #4]
+ 1a2:	6898      	ldr	r0, [r3, #8]
+ 1a4:	2300      	movs	r3, #0
+ 1a6:	2200      	movs	r2, #0
+ 1a8:	2100      	movs	r1, #0
+ 1aa:	47a0      	blx	r4
+}
+ 1ac:	46c0      	nop			; (mov r8, r8)
+ 1ae:	46bd      	mov	sp, r7
+ 1b0:	b009      	add	sp, #36	; 0x24
+ 1b2:	bd90      	pop	{r4, r7, pc}
+
+000001b4 <_ZN6USBLib9USBDevice21handleStandardRequestEv>:
+
+bool USBDevice::handleStandardRequest()
+{
+ 1b4:	b580      	push	{r7, lr}
+ 1b6:	b082      	sub	sp, #8
+ 1b8:	af00      	add	r7, sp, #0
+ 1ba:	6078      	str	r0, [r7, #4]
+	switch (_transfer.setupPacket.bRequest)
+ 1bc:	687b      	ldr	r3, [r7, #4]
+ 1be:	7b5b      	ldrb	r3, [r3, #13]
+ 1c0:	2b0b      	cmp	r3, #11
+ 1c2:	d81e      	bhi.n	202 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x4e>
+ 1c4:	009a      	lsls	r2, r3, #2
+ 1c6:	4b11      	ldr	r3, [pc, #68]	; (20c <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x58>)
+ 1c8:	18d3      	adds	r3, r2, r3
+ 1ca:	681b      	ldr	r3, [r3, #0]
+ 1cc:	469f      	mov	pc, r3
+	{
+	case Request::GetStatus:
+		return false;
+ 1ce:	2300      	movs	r3, #0
+ 1d0:	e018      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::ClearFeature:
+		return false;
+ 1d2:	2300      	movs	r3, #0
+ 1d4:	e016      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::SetFeature:
+		return false;
+ 1d6:	2300      	movs	r3, #0
+ 1d8:	e014      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::SetAddress:
+		return handleSetAddress();
+ 1da:	687b      	ldr	r3, [r7, #4]
+ 1dc:	0018      	movs	r0, r3
+ 1de:	f7ff fffe 	bl	284 <_ZN6USBLib9USBDevice16handleSetAddressEv>
+ 1e2:	0003      	movs	r3, r0
+ 1e4:	e00e      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::GetDescriptor:
+		return handleGetDescriptor();
+ 1e6:	687b      	ldr	r3, [r7, #4]
+ 1e8:	0018      	movs	r0, r3
+ 1ea:	f7ff fffe 	bl	210 <_ZN6USBLib9USBDevice19handleGetDescriptorEv>
+ 1ee:	0003      	movs	r3, r0
+ 1f0:	e008      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::GetConfiguration:
+		return false;
+ 1f2:	2300      	movs	r3, #0
+ 1f4:	e006      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::Setconfiguration:
+		return false;
+ 1f6:	2300      	movs	r3, #0
+ 1f8:	e004      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::GetInterface:
+		return false;
+ 1fa:	2300      	movs	r3, #0
+ 1fc:	e002      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	case Request::SetInterface:
+		return false;
+ 1fe:	2300      	movs	r3, #0
+ 200:	e000      	b.n	204 <_ZN6USBLib9USBDevice21handleStandardRequestEv+0x50>
+	default:
+		return false;
+ 202:	2300      	movs	r3, #0
+	}
+}
+ 204:	0018      	movs	r0, r3
+ 206:	46bd      	mov	sp, r7
+ 208:	b002      	add	sp, #8
+ 20a:	bd80      	pop	{r7, pc}
+ 20c:	00000038 	.word	0x00000038
+
+00000210 <_ZN6USBLib9USBDevice19handleGetDescriptorEv>:
+
+bool USBDevice::handleGetDescriptor()
+{
+ 210:	b580      	push	{r7, lr}
+ 212:	b086      	sub	sp, #24
+ 214:	af00      	add	r7, sp, #0
+ 216:	6078      	str	r0, [r7, #4]
+	auto descType = static_cast<DescriptorType>(_transfer.setupPacket.wValue
+ 218:	687b      	ldr	r3, [r7, #4]
+ 21a:	89db      	ldrh	r3, [r3, #14]
+			>> 8);
+ 21c:	121a      	asrs	r2, r3, #8
+ 21e:	2317      	movs	r3, #23
+ 220:	18fb      	adds	r3, r7, r3
+ 222:	701a      	strb	r2, [r3, #0]
+
+	switch (descType)
+ 224:	2317      	movs	r3, #23
+ 226:	18fb      	adds	r3, r7, r3
+ 228:	781a      	ldrb	r2, [r3, #0]
+ 22a:	b2d3      	uxtb	r3, r2
+ 22c:	2b01      	cmp	r3, #1
+ 22e:	d003      	beq.n	238 <_ZN6USBLib9USBDevice19handleGetDescriptorEv+0x28>
+ 230:	b2d3      	uxtb	r3, r2
+ 232:	2b02      	cmp	r3, #2
+ 234:	d017      	beq.n	266 <_ZN6USBLib9USBDevice19handleGetDescriptorEv+0x56>
+ 236:	e01e      	b.n	276 <_ZN6USBLib9USBDevice19handleGetDescriptorEv+0x66>
+	{
+	case DescriptorType::DeviceDescriptor:
+	{
+		auto deviceDescriptor = _config->getDeviceDescriptor();
+ 238:	687b      	ldr	r3, [r7, #4]
+ 23a:	685b      	ldr	r3, [r3, #4]
+ 23c:	681b      	ldr	r3, [r3, #0]
+ 23e:	681a      	ldr	r2, [r3, #0]
+ 240:	687b      	ldr	r3, [r7, #4]
+ 242:	6859      	ldr	r1, [r3, #4]
+ 244:	230c      	movs	r3, #12
+ 246:	18fb      	adds	r3, r7, r3
+ 248:	0018      	movs	r0, r3
+ 24a:	4790      	blx	r2
+		_transfer.data = deviceDescriptor.first;
+ 24c:	230c      	movs	r3, #12
+ 24e:	18fb      	adds	r3, r7, r3
+ 250:	681a      	ldr	r2, [r3, #0]
+ 252:	687b      	ldr	r3, [r7, #4]
+ 254:	615a      	str	r2, [r3, #20]
+		_transfer.remaining = deviceDescriptor.second;
+ 256:	230c      	movs	r3, #12
+ 258:	18fb      	adds	r3, r7, r3
+ 25a:	791b      	ldrb	r3, [r3, #4]
+ 25c:	b29a      	uxth	r2, r3
+ 25e:	687b      	ldr	r3, [r7, #4]
+ 260:	831a      	strh	r2, [r3, #24]
+		return true;
+ 262:	2301      	movs	r3, #1
+ 264:	e008      	b.n	278 <_ZN6USBLib9USBDevice19handleGetDescriptorEv+0x68>
+	}
+	case DescriptorType::ConfigurationDescriptor:
+	{
+		_transfer.data = _configurationDescriptor;
+ 266:	687b      	ldr	r3, [r7, #4]
+ 268:	4a05      	ldr	r2, [pc, #20]	; (280 <_ZN6USBLib9USBDevice19handleGetDescriptorEv+0x70>)
+ 26a:	615a      	str	r2, [r3, #20]
+		_transfer.remaining = sizeof(_configurationDescriptor);
+ 26c:	687b      	ldr	r3, [r7, #4]
+ 26e:	2229      	movs	r2, #41	; 0x29
+ 270:	831a      	strh	r2, [r3, #24]
+		return true;
+ 272:	2301      	movs	r3, #1
+ 274:	e000      	b.n	278 <_ZN6USBLib9USBDevice19handleGetDescriptorEv+0x68>
+	}
+	default:
+		return false;
+ 276:	2300      	movs	r3, #0
+	}
+}
+ 278:	0018      	movs	r0, r3
+ 27a:	46bd      	mov	sp, r7
+ 27c:	b006      	add	sp, #24
+ 27e:	bd80      	pop	{r7, pc}
+ 280:	0000000c 	.word	0x0000000c
+
+00000284 <_ZN6USBLib9USBDevice16handleSetAddressEv>:
+
+bool USBDevice::handleSetAddress()
+{
+ 284:	b580      	push	{r7, lr}
+ 286:	b082      	sub	sp, #8
+ 288:	af00      	add	r7, sp, #0
+ 28a:	6078      	str	r0, [r7, #4]
+	_address = _transfer.setupPacket.wValue & 0x7F;
+ 28c:	687b      	ldr	r3, [r7, #4]
+ 28e:	89db      	ldrh	r3, [r3, #14]
+ 290:	b2db      	uxtb	r3, r3
+ 292:	227f      	movs	r2, #127	; 0x7f
+ 294:	4013      	ands	r3, r2
+ 296:	b2d9      	uxtb	r1, r3
+ 298:	687b      	ldr	r3, [r7, #4]
+ 29a:	2220      	movs	r2, #32
+ 29c:	5499      	strb	r1, [r3, r2]
+	return true;
+ 29e:	2301      	movs	r3, #1
+}
+ 2a0:	0018      	movs	r0, r3
+ 2a2:	46bd      	mov	sp, r7
+ 2a4:	b002      	add	sp, #8
+ 2a6:	bd80      	pop	{r7, pc}
+
+000002a8 <_ZN6USBLib9USBDevice5EP0inEv>:
+
+void USBDevice::EP0in(void)
+{
+ 2a8:	b580      	push	{r7, lr}
+ 2aa:	b084      	sub	sp, #16
+ 2ac:	af00      	add	r7, sp, #0
+ 2ae:	6078      	str	r0, [r7, #4]
+	bool res = handleControlIn();
+ 2b0:	687b      	ldr	r3, [r7, #4]
+ 2b2:	0018      	movs	r0, r3
+ 2b4:	f7ff fffe 	bl	2ec <_ZN6USBLib9USBDevice15handleControlInEv>
+ 2b8:	0003      	movs	r3, r0
+ 2ba:	001a      	movs	r2, r3
+ 2bc:	230f      	movs	r3, #15
+ 2be:	18fb      	adds	r3, r7, r3
+ 2c0:	701a      	strb	r2, [r3, #0]
+}
+ 2c2:	46c0      	nop			; (mov r8, r8)
+ 2c4:	46bd      	mov	sp, r7
+ 2c6:	b004      	add	sp, #16
+ 2c8:	bd80      	pop	{r7, pc}
+
+000002ca <_ZN6USBLib9USBDevice6EP0outEv>:
+
+void USBDevice::EP0out(void)
+{
+ 2ca:	b580      	push	{r7, lr}
+ 2cc:	b084      	sub	sp, #16
+ 2ce:	af00      	add	r7, sp, #0
+ 2d0:	6078      	str	r0, [r7, #4]
+	bool res = handleControlOut();
+ 2d2:	687b      	ldr	r3, [r7, #4]
+ 2d4:	0018      	movs	r0, r3
+ 2d6:	f7ff fffe 	bl	342 <_ZN6USBLib9USBDevice16handleControlOutEv>
+ 2da:	0003      	movs	r3, r0
+ 2dc:	001a      	movs	r2, r3
+ 2de:	230f      	movs	r3, #15
+ 2e0:	18fb      	adds	r3, r7, r3
+ 2e2:	701a      	strb	r2, [r3, #0]
+}
+ 2e4:	46c0      	nop			; (mov r8, r8)
+ 2e6:	46bd      	mov	sp, r7
+ 2e8:	b004      	add	sp, #16
+ 2ea:	bd80      	pop	{r7, pc}
+
+000002ec <_ZN6USBLib9USBDevice15handleControlInEv>:
+
+bool USBDevice::handleControlIn()
+{
+ 2ec:	b580      	push	{r7, lr}
+ 2ee:	b084      	sub	sp, #16
+ 2f0:	af00      	add	r7, sp, #0
+ 2f2:	6078      	str	r0, [r7, #4]
+	bool res = false;
+ 2f4:	230f      	movs	r3, #15
+ 2f6:	18fb      	adds	r3, r7, r3
+ 2f8:	2200      	movs	r2, #0
+ 2fa:	701a      	strb	r2, [r3, #0]
+	res = handleControlDataInStage();
+ 2fc:	687b      	ldr	r3, [r7, #4]
+ 2fe:	0018      	movs	r0, r3
+ 300:	f7ff fffe 	bl	38a <_ZN6USBLib9USBDevice24handleControlDataInStageEv>
+ 304:	0003      	movs	r3, r0
+ 306:	001a      	movs	r2, r3
+ 308:	230f      	movs	r3, #15
+ 30a:	18fb      	adds	r3, r7, r3
+ 30c:	701a      	strb	r2, [r3, #0]
+	if (_address != 0)
+ 30e:	687b      	ldr	r3, [r7, #4]
+ 310:	2220      	movs	r2, #32
+ 312:	5c9b      	ldrb	r3, [r3, r2]
+ 314:	2b00      	cmp	r3, #0
+ 316:	d00f      	beq.n	338 <_ZN6USBLib9USBDevice15handleControlInEv+0x4c>
+	{
+		_lowLevelDriver.setAddress(_address);
+ 318:	687b      	ldr	r3, [r7, #4]
+ 31a:	689b      	ldr	r3, [r3, #8]
+ 31c:	681b      	ldr	r3, [r3, #0]
+ 31e:	3308      	adds	r3, #8
+ 320:	681a      	ldr	r2, [r3, #0]
+ 322:	687b      	ldr	r3, [r7, #4]
+ 324:	6898      	ldr	r0, [r3, #8]
+ 326:	687b      	ldr	r3, [r7, #4]
+ 328:	2120      	movs	r1, #32
+ 32a:	5c5b      	ldrb	r3, [r3, r1]
+ 32c:	0019      	movs	r1, r3
+ 32e:	4790      	blx	r2
+		_address = 0;
+ 330:	687b      	ldr	r3, [r7, #4]
+ 332:	2220      	movs	r2, #32
+ 334:	2100      	movs	r1, #0
+ 336:	5499      	strb	r1, [r3, r2]
+	}
+
+}
+ 338:	46c0      	nop			; (mov r8, r8)
+ 33a:	0018      	movs	r0, r3
+ 33c:	46bd      	mov	sp, r7
+ 33e:	b004      	add	sp, #16
+ 340:	bd80      	pop	{r7, pc}
+
+00000342 <_ZN6USBLib9USBDevice16handleControlOutEv>:
+
+bool USBDevice::handleControlOut()
+{
+ 342:	b590      	push	{r4, r7, lr}
+ 344:	b095      	sub	sp, #84	; 0x54
+ 346:	af00      	add	r7, sp, #0
+ 348:	6078      	str	r0, [r7, #4]
+	uint8_t buffer[64];
+
+	auto cnt = _lowLevelDriver.readEndpointData(0, buffer);
+ 34a:	687b      	ldr	r3, [r7, #4]
+ 34c:	689b      	ldr	r3, [r3, #8]
+ 34e:	681b      	ldr	r3, [r3, #0]
+ 350:	3314      	adds	r3, #20
+ 352:	681c      	ldr	r4, [r3, #0]
+ 354:	687b      	ldr	r3, [r7, #4]
+ 356:	689b      	ldr	r3, [r3, #8]
+ 358:	220c      	movs	r2, #12
+ 35a:	18ba      	adds	r2, r7, r2
+ 35c:	2100      	movs	r1, #0
+ 35e:	0018      	movs	r0, r3
+ 360:	47a0      	blx	r4
+ 362:	0003      	movs	r3, r0
+ 364:	001a      	movs	r2, r3
+ 366:	234e      	movs	r3, #78	; 0x4e
+ 368:	18fb      	adds	r3, r7, r3
+ 36a:	801a      	strh	r2, [r3, #0]
+
+	_lowLevelDriver.readEndpoint(0);
+ 36c:	687b      	ldr	r3, [r7, #4]
+ 36e:	689b      	ldr	r3, [r3, #8]
+ 370:	681b      	ldr	r3, [r3, #0]
+ 372:	3318      	adds	r3, #24
+ 374:	681a      	ldr	r2, [r3, #0]
+ 376:	687b      	ldr	r3, [r7, #4]
+ 378:	689b      	ldr	r3, [r3, #8]
+ 37a:	2100      	movs	r1, #0
+ 37c:	0018      	movs	r0, r3
+ 37e:	4790      	blx	r2
+}
+ 380:	46c0      	nop			; (mov r8, r8)
+ 382:	0018      	movs	r0, r3
+ 384:	46bd      	mov	sp, r7
+ 386:	b015      	add	sp, #84	; 0x54
+ 388:	bd90      	pop	{r4, r7, pc}
+
+0000038a <_ZN6USBLib9USBDevice24handleControlDataInStageEv>:
+
+/* Control transfer data IN stage */
+bool USBDevice::handleControlDataInStage()
+{
+ 38a:	b590      	push	{r4, r7, lr}
+ 38c:	b085      	sub	sp, #20
+ 38e:	af00      	add	r7, sp, #0
+ 390:	6078      	str	r0, [r7, #4]
+	/* Check if transfer has completed (status stage transactions */
+	/* also have transfer.remaining == 0) */
+	if (_transfer.remaining == 0)
+ 392:	687b      	ldr	r3, [r7, #4]
+ 394:	8b1b      	ldrh	r3, [r3, #24]
+ 396:	2b00      	cmp	r3, #0
+ 398:	d120      	bne.n	3dc <_ZN6USBLib9USBDevice24handleControlDataInStageEv+0x52>
+	{
+		if (_transfer.isZeroLengthRequired)
+ 39a:	687b      	ldr	r3, [r7, #4]
+ 39c:	7f1b      	ldrb	r3, [r3, #28]
+ 39e:	2b00      	cmp	r3, #0
+ 3a0:	d00d      	beq.n	3be <_ZN6USBLib9USBDevice24handleControlDataInStageEv+0x34>
+		{
+			/* Send zero length packet */
+			_lowLevelDriver.writeEndpoint(0, nullptr, 0);
+ 3a2:	687b      	ldr	r3, [r7, #4]
+ 3a4:	689b      	ldr	r3, [r3, #8]
+ 3a6:	681b      	ldr	r3, [r3, #0]
+ 3a8:	3310      	adds	r3, #16
+ 3aa:	681c      	ldr	r4, [r3, #0]
+ 3ac:	687b      	ldr	r3, [r7, #4]
+ 3ae:	6898      	ldr	r0, [r3, #8]
+ 3b0:	2300      	movs	r3, #0
+ 3b2:	2200      	movs	r2, #0
+ 3b4:	2100      	movs	r1, #0
+ 3b6:	47a0      	blx	r4
+			_transfer.isZeroLengthRequired = false; //???
+ 3b8:	687b      	ldr	r3, [r7, #4]
+ 3ba:	2200      	movs	r2, #0
+ 3bc:	771a      	strb	r2, [r3, #28]
+		}
+
+		_transfer.stage = TransferStage::Status;
+ 3be:	687b      	ldr	r3, [r7, #4]
+ 3c0:	2202      	movs	r2, #2
+ 3c2:	76da      	strb	r2, [r3, #27]
+		_lowLevelDriver.readEndpoint(0);
+ 3c4:	687b      	ldr	r3, [r7, #4]
+ 3c6:	689b      	ldr	r3, [r3, #8]
+ 3c8:	681b      	ldr	r3, [r3, #0]
+ 3ca:	3318      	adds	r3, #24
+ 3cc:	681a      	ldr	r2, [r3, #0]
+ 3ce:	687b      	ldr	r3, [r7, #4]
+ 3d0:	689b      	ldr	r3, [r3, #8]
+ 3d2:	2100      	movs	r1, #0
+ 3d4:	0018      	movs	r0, r3
+ 3d6:	4790      	blx	r2
+
+		/* Completed */
+		return true;
+ 3d8:	2301      	movs	r3, #1
+ 3da:	e037      	b.n	44c <_ZN6USBLib9USBDevice24handleControlDataInStageEv+0xc2>
+	}
+
+	auto packetSize = _transfer.remaining;
+ 3dc:	230e      	movs	r3, #14
+ 3de:	18fb      	adds	r3, r7, r3
+ 3e0:	687a      	ldr	r2, [r7, #4]
+ 3e2:	8b12      	ldrh	r2, [r2, #24]
+ 3e4:	801a      	strh	r2, [r3, #0]
+
+	if (packetSize > 64)
+ 3e6:	230e      	movs	r3, #14
+ 3e8:	18fb      	adds	r3, r7, r3
+ 3ea:	881b      	ldrh	r3, [r3, #0]
+ 3ec:	2b40      	cmp	r3, #64	; 0x40
+ 3ee:	dd03      	ble.n	3f8 <_ZN6USBLib9USBDevice24handleControlDataInStageEv+0x6e>
+	{
+		packetSize = 64;
+ 3f0:	230e      	movs	r3, #14
+ 3f2:	18fb      	adds	r3, r7, r3
+ 3f4:	2240      	movs	r2, #64	; 0x40
+ 3f6:	801a      	strh	r2, [r3, #0]
+	}
+
+	/* Write to endpoint */
+	_lowLevelDriver.writeEndpoint(0, _transfer.data, packetSize);
+ 3f8:	687b      	ldr	r3, [r7, #4]
+ 3fa:	689b      	ldr	r3, [r3, #8]
+ 3fc:	681b      	ldr	r3, [r3, #0]
+ 3fe:	3310      	adds	r3, #16
+ 400:	681c      	ldr	r4, [r3, #0]
+ 402:	687b      	ldr	r3, [r7, #4]
+ 404:	6898      	ldr	r0, [r3, #8]
+ 406:	687b      	ldr	r3, [r7, #4]
+ 408:	695a      	ldr	r2, [r3, #20]
+ 40a:	230e      	movs	r3, #14
+ 40c:	18fb      	adds	r3, r7, r3
+ 40e:	881b      	ldrh	r3, [r3, #0]
+ 410:	2100      	movs	r1, #0
+ 412:	47a0      	blx	r4
+	_lowLevelDriver.readEndpoint(0);
+ 414:	687b      	ldr	r3, [r7, #4]
+ 416:	689b      	ldr	r3, [r3, #8]
+ 418:	681b      	ldr	r3, [r3, #0]
+ 41a:	3318      	adds	r3, #24
+ 41c:	681a      	ldr	r2, [r3, #0]
+ 41e:	687b      	ldr	r3, [r7, #4]
+ 420:	689b      	ldr	r3, [r3, #8]
+ 422:	2100      	movs	r1, #0
+ 424:	0018      	movs	r0, r3
+ 426:	4790      	blx	r2
+
+	/* Update transfer */
+	_transfer.data += packetSize;
+ 428:	687b      	ldr	r3, [r7, #4]
+ 42a:	695a      	ldr	r2, [r3, #20]
+ 42c:	230e      	movs	r3, #14
+ 42e:	18fb      	adds	r3, r7, r3
+ 430:	881b      	ldrh	r3, [r3, #0]
+ 432:	18d2      	adds	r2, r2, r3
+ 434:	687b      	ldr	r3, [r7, #4]
+ 436:	615a      	str	r2, [r3, #20]
+	_transfer.remaining -= packetSize;
+ 438:	687b      	ldr	r3, [r7, #4]
+ 43a:	8b1a      	ldrh	r2, [r3, #24]
+ 43c:	230e      	movs	r3, #14
+ 43e:	18fb      	adds	r3, r7, r3
+ 440:	881b      	ldrh	r3, [r3, #0]
+ 442:	1ad3      	subs	r3, r2, r3
+ 444:	b29a      	uxth	r2, r3
+ 446:	687b      	ldr	r3, [r7, #4]
+ 448:	831a      	strh	r2, [r3, #24]
+
+	return true;
+ 44a:	2301      	movs	r3, #1
+}
+ 44c:	0018      	movs	r0, r3
+ 44e:	46bd      	mov	sp, r7
+ 450:	b005      	add	sp, #20
+ 452:	bd90      	pop	{r4, r7, pc}
+
+Disassembly of section .text._ZN6USBLib11SetupPacket11deserializeEPh:
+
+00000000 <_ZN6USBLib11SetupPacket11deserializeEPh>:
+{
+   0:	b580      	push	{r7, lr}
+   2:	b084      	sub	sp, #16
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	6039      	str	r1, [r7, #0]
+}
+   a:	683b      	ldr	r3, [r7, #0]
+   c:	781b      	ldrb	r3, [r3, #0]
+   e:	09db      	lsrs	r3, r3, #7
+  10:	b2db      	uxtb	r3, r3
+USBDevice::~USBDevice()
+  12:	1c1a      	adds	r2, r3, #0
+  14:	2301      	movs	r3, #1
+  16:	4013      	ands	r3, r2
+  18:	b2da      	uxtb	r2, r3
+  1a:	230c      	movs	r3, #12
+  1c:	18fb      	adds	r3, r7, r3
+  1e:	2101      	movs	r1, #1
+}
+  20:	400a      	ands	r2, r1
+  22:	0010      	movs	r0, r2
+  24:	781a      	ldrb	r2, [r3, #0]
+  26:	2101      	movs	r1, #1
+  28:	438a      	bics	r2, r1
+  2a:	1c11      	adds	r1, r2, #0
+  2c:	1c02      	adds	r2, r0, #0
+  2e:	430a      	orrs	r2, r1
+USBDevice::~USBDevice()
+  30:	701a      	strb	r2, [r3, #0]
+  32:	683b      	ldr	r3, [r7, #0]
+  34:	781b      	ldrb	r3, [r3, #0]
+  36:	115b      	asrs	r3, r3, #5
+}
+  38:	b2db      	uxtb	r3, r3
+  3a:	1c1a      	adds	r2, r3, #0
+  3c:	2303      	movs	r3, #3
+  3e:	4013      	ands	r3, r2
+  40:	b2da      	uxtb	r2, r3
+  42:	230c      	movs	r3, #12
+  44:	18fb      	adds	r3, r7, r3
+  46:	2103      	movs	r1, #3
+  48:	400a      	ands	r2, r1
+  4a:	1890      	adds	r0, r2, r2
+  4c:	781a      	ldrb	r2, [r3, #0]
+  4e:	2106      	movs	r1, #6
+  50:	438a      	bics	r2, r1
+  52:	1c11      	adds	r1, r2, #0
+{
+  54:	1c02      	adds	r2, r0, #0
+  56:	430a      	orrs	r2, r1
+  58:	701a      	strb	r2, [r3, #0]
+  5a:	683b      	ldr	r3, [r7, #0]
+	return _config->getDeviceDescriptor().first;
+  5c:	781b      	ldrb	r3, [r3, #0]
+  5e:	1c1a      	adds	r2, r3, #0
+  60:	231f      	movs	r3, #31
+  62:	4013      	ands	r3, r2
+  64:	b2da      	uxtb	r2, r3
+  66:	230c      	movs	r3, #12
+  68:	18fb      	adds	r3, r7, r3
+  6a:	00d0      	lsls	r0, r2, #3
+  6c:	781a      	ldrb	r2, [r3, #0]
+  6e:	2107      	movs	r1, #7
+  70:	400a      	ands	r2, r1
+  72:	1c11      	adds	r1, r2, #0
+  74:	1c02      	adds	r2, r0, #0
+}
+  76:	430a      	orrs	r2, r1
+  78:	701a      	strb	r2, [r3, #0]
+  7a:	687b      	ldr	r3, [r7, #4]
+  7c:	220c      	movs	r2, #12
+{
+  7e:	18ba      	adds	r2, r7, r2
+  80:	7812      	ldrb	r2, [r2, #0]
+  82:	701a      	strb	r2, [r3, #0]
+  84:	683b      	ldr	r3, [r7, #0]
+	_address = 0;
+  86:	3301      	adds	r3, #1
+  88:	781a      	ldrb	r2, [r3, #0]
+  8a:	687b      	ldr	r3, [r7, #4]
+  8c:	705a      	strb	r2, [r3, #1]
+}
+  8e:	683b      	ldr	r3, [r7, #0]
+  90:	3302      	adds	r3, #2
+  92:	781b      	ldrb	r3, [r3, #0]
+  94:	b21a      	sxth	r2, r3
+{
+  96:	683b      	ldr	r3, [r7, #0]
+  98:	3303      	adds	r3, #3
+  9a:	781b      	ldrb	r3, [r3, #0]
+  9c:	021b      	lsls	r3, r3, #8
+	_lowLevelDriver.connect();
+  9e:	b21b      	sxth	r3, r3
+  a0:	4313      	orrs	r3, r2
+  a2:	b21b      	sxth	r3, r3
+  a4:	b29a      	uxth	r2, r3
+  a6:	687b      	ldr	r3, [r7, #4]
+  a8:	805a      	strh	r2, [r3, #2]
+  aa:	683b      	ldr	r3, [r7, #0]
+  ac:	3304      	adds	r3, #4
+}
+  ae:	781b      	ldrb	r3, [r3, #0]
+  b0:	b21a      	sxth	r2, r3
+  b2:	683b      	ldr	r3, [r7, #0]
+  b4:	3305      	adds	r3, #5
+{
+  b6:	781b      	ldrb	r3, [r3, #0]
+  b8:	021b      	lsls	r3, r3, #8
+  ba:	b21b      	sxth	r3, r3
+  bc:	4313      	orrs	r3, r2
+	_lowLevelDriver.disconnect();
+  be:	b21b      	sxth	r3, r3
+  c0:	b29a      	uxth	r2, r3
+  c2:	687b      	ldr	r3, [r7, #4]
+  c4:	809a      	strh	r2, [r3, #4]
+  c6:	683b      	ldr	r3, [r7, #0]
+  c8:	3306      	adds	r3, #6
+  ca:	781b      	ldrb	r3, [r3, #0]
+  cc:	b21a      	sxth	r2, r3
+  ce:	683b      	ldr	r3, [r7, #0]
+}
+  d0:	3307      	adds	r3, #7
+  d2:	781b      	ldrb	r3, [r3, #0]
+  d4:	021b      	lsls	r3, r3, #8
+  d6:	b21b      	sxth	r3, r3
+{
+  d8:	4313      	orrs	r3, r2
+  da:	b21b      	sxth	r3, r3
+  dc:	b29a      	uxth	r2, r3
+  de:	687b      	ldr	r3, [r7, #4]
+	_lowLevelDriver.readSetupHeader(buffer);
+  e0:	80da      	strh	r2, [r3, #6]
+  e2:	6878      	ldr	r0, [r7, #4]
+  e4:	46bd      	mov	sp, r7
+  e6:	b004      	add	sp, #16
+  e8:	bd80      	pop	{r7, pc}
+
+Disassembly of section .text._ZN6USBLib15ControlTransfer10initializeENS_11SetupPacketE:
+
+00000000 <_ZN6USBLib15ControlTransfer10initializeENS_11SetupPacketE>:
+{
+   0:	b580      	push	{r7, lr}
+   2:	b084      	sub	sp, #16
+   4:	af00      	add	r7, sp, #0
+   6:	60f8      	str	r0, [r7, #12]
+  return 0;
+   8:	1d3b      	adds	r3, r7, #4
+}
+   a:	6019      	str	r1, [r3, #0]
+   c:	605a      	str	r2, [r3, #4]
+   e:	68fb      	ldr	r3, [r7, #12]
+  10:	1d3a      	adds	r2, r7, #4
+USBDevice::~USBDevice()
+  12:	ca03      	ldmia	r2!, {r0, r1}
+  14:	c303      	stmia	r3!, {r0, r1}
+  16:	68fb      	ldr	r3, [r7, #12]
+  18:	2200      	movs	r2, #0
+  1a:	609a      	str	r2, [r3, #8]
+  1c:	68fb      	ldr	r3, [r7, #12]
+  1e:	2200      	movs	r2, #0
+}
+  20:	819a      	strh	r2, [r3, #12]
+  22:	68fb      	ldr	r3, [r7, #12]
+  24:	2200      	movs	r2, #0
+  26:	739a      	strb	r2, [r3, #14]
+  28:	68fb      	ldr	r3, [r7, #12]
+  2a:	2200      	movs	r2, #0
+  2c:	73da      	strb	r2, [r3, #15]
+  2e:	68fb      	ldr	r3, [r7, #12]
+USBDevice::~USBDevice()
+  30:	2200      	movs	r2, #0
+  32:	741a      	strb	r2, [r3, #16]
+  34:	68fb      	ldr	r3, [r7, #12]
+  36:	2200      	movs	r2, #0
+}
+  38:	745a      	strb	r2, [r3, #17]
+  3a:	46c0      	nop			; (mov r8, r8)
+  3c:	46bd      	mov	sp, r7
+  3e:	b004      	add	sp, #16
+  40:	bd80      	pop	{r7, pc}
+
+USBDeviceConfigration.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <_ZL20__gthread_key_deletei>:
+  return 0;
+}
+
+static int _GLIBCXX_UNUSED
+__gthread_key_delete (__gthread_key_t __key _GLIBCXX_UNUSED)
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	2300      	movs	r3, #0
+}
+   a:	0018      	movs	r0, r3
+   c:	46bd      	mov	sp, r7
+   e:	b002      	add	sp, #8
+  10:	bd80      	pop	{r7, pc}
+
+USBHID.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <_ZL20__gthread_key_deletei>:
+  return 0;
+}
+
+static int _GLIBCXX_UNUSED
+__gthread_key_delete (__gthread_key_t __key _GLIBCXX_UNUSED)
+{
+   0:	b580      	push	{r7, lr}
+   2:	b082      	sub	sp, #8
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+  return 0;
+   8:	2300      	movs	r3, #0
+}
+   a:	0018      	movs	r0, r3
+   c:	46bd      	mov	sp, r7
+   e:	b002      	add	sp, #8
+  10:	bd80      	pop	{r7, pc}
+
+00000012 <_ZN6USBLib6USBHIDD1Ev>:
+
+namespace USBLib
+{
+
+
+USBHID::~USBHID()
+  12:	b580      	push	{r7, lr}
+  14:	b082      	sub	sp, #8
+  16:	af00      	add	r7, sp, #0
+  18:	6078      	str	r0, [r7, #4]
+  1a:	4a06      	ldr	r2, [pc, #24]	; (34 <_ZN6USBLib6USBHIDD1Ev+0x22>)
+  1c:	687b      	ldr	r3, [r7, #4]
+  1e:	601a      	str	r2, [r3, #0]
+  20:	687b      	ldr	r3, [r7, #4]
+  22:	0018      	movs	r0, r3
+  24:	f7ff fffe 	bl	0 <_ZN6USBLib9USBDeviceD2Ev>
+{
+	// TODO Auto-generated destructor stub
+}
+  28:	687b      	ldr	r3, [r7, #4]
+  2a:	0018      	movs	r0, r3
+  2c:	46bd      	mov	sp, r7
+  2e:	b002      	add	sp, #8
+  30:	bd80      	pop	{r7, pc}
+  32:	46c0      	nop			; (mov r8, r8)
+  34:	00000008 	.word	0x00000008
+
+00000038 <_ZN6USBLib6USBHIDD0Ev>:
+USBHID::~USBHID()
+  38:	b580      	push	{r7, lr}
+  3a:	b082      	sub	sp, #8
+  3c:	af00      	add	r7, sp, #0
+  3e:	6078      	str	r0, [r7, #4]
+}
+  40:	687b      	ldr	r3, [r7, #4]
+  42:	0018      	movs	r0, r3
+  44:	f7ff fffe 	bl	12 <_ZN6USBLib6USBHIDD1Ev>
+  48:	687b      	ldr	r3, [r7, #4]
+  4a:	2124      	movs	r1, #36	; 0x24
+  4c:	0018      	movs	r0, r3
+  4e:	f7ff fffe 	bl	0 <_ZdlPvj>
+  52:	687b      	ldr	r3, [r7, #4]
+  54:	0018      	movs	r0, r3
+  56:	46bd      	mov	sp, r7
+  58:	b002      	add	sp, #8
+  5a:	bd80      	pop	{r7, pc}
+
+0000005c <_ZN6USBLib6USBHID19connectStateChangedEb>:
+
+} /* namespace USB */
+
+
+void USBLib::USBHID::connectStateChanged(bool connected)
+{
+  5c:	b580      	push	{r7, lr}
+  5e:	b082      	sub	sp, #8
+  60:	af00      	add	r7, sp, #0
+  62:	6078      	str	r0, [r7, #4]
+  64:	000a      	movs	r2, r1
+  66:	1cfb      	adds	r3, r7, #3
+  68:	701a      	strb	r2, [r3, #0]
+}
+  6a:	46c0      	nop			; (mov r8, r8)
+  6c:	46bd      	mov	sp, r7
+  6e:	b002      	add	sp, #8
+  70:	bd80      	pop	{r7, pc}
+
+00000072 <_ZN6USBLib6USBHID19suspendStateChangedEb>:
+
+void USBLib::USBHID::suspendStateChanged(bool suspended)
+{
+  72:	b580      	push	{r7, lr}
+  74:	b082      	sub	sp, #8
+  76:	af00      	add	r7, sp, #0
+  78:	6078      	str	r0, [r7, #4]
+  7a:	000a      	movs	r2, r1
+  7c:	1cfb      	adds	r3, r7, #3
+  7e:	701a      	strb	r2, [r3, #0]
+}
+  80:	46c0      	nop			; (mov r8, r8)
+  82:	46bd      	mov	sp, r7
+  84:	b002      	add	sp, #8
+  86:	bd80      	pop	{r7, pc}
+
+00000088 <_ZN6USBLib6USBHID3SOFEi>:
+
+void USBLib::USBHID::SOF(int frameNumber)
+{
+  88:	b580      	push	{r7, lr}
+  8a:	b082      	sub	sp, #8
+  8c:	af00      	add	r7, sp, #0
+  8e:	6078      	str	r0, [r7, #4]
+  90:	6039      	str	r1, [r7, #0]
+}
+  92:	46c0      	nop			; (mov r8, r8)
+  94:	46bd      	mov	sp, r7
+  96:	b002      	add	sp, #8
+  98:	bd80      	pop	{r7, pc}
+  9a:	46c0      	nop			; (mov r8, r8)
